@@ -15,25 +15,35 @@
    so that I can test whether the search and retrieval are correct.  
 
 5. As a researcher, I want the system to return top-5 results with sources  
-   so that I can trust the answers and verify the evidence.
+   so that I can trust the answers and verify the evidence.  
+
+6. As a system, I want to cluster chunks into subtopics  
+   so that evaluation queries cover diverse biomedical themes (e.g., analgesia, toxicity, humane endpoints).  
+
+7. As a system, I want to automatically generate queries from representative chunks  
+   so that I can test retrieval performance without manually writing queries.  
+
+8. As a researcher, I want the system to calculate recall, precision, and groundedness  
+   so that I can measure how well retrieval works.  
+
 ---
 
 ## Lower Priority
 
-6. As a developer, I want to follow PEP 8 and PEP 257 standards  
+9. As a developer, I want to follow PEP 8 and PEP 257 standards  
    so that the code is readable and maintainable.  
 
-7. As a developer, I want automatic API docs generation  
-   so that users can understand how to use the system easily.  
+10. As a developer, I want automatic API docs generation  
+    so that users can understand how to use the system easily.  
 
-8. As a developer, I want to use pytest for integration and end-to-end tests  
-   so that I can make sure workflows complete without errors.  
+11. As a developer, I want to use pytest for integration and end-to-end tests  
+    so that I can make sure workflows complete without errors.  
 
-9. As a team, I want to track tasks in GitHub Projects  
-   so that we can manage work without heavy tools like Jira.  
+12. As a team, I want to track tasks in GitHub Projects  
+    so that we can manage work without heavy tools like Jira.  
 
-10. As a developer, I want to experiment with different biomedical prompt templates  
+13. As a developer, I want to experiment with different biomedical prompt templates  
     so that the LLM provides more accurate and less hallucinated answers.  
 
-11. As a researcher, I want to manually spot-check 10–15 queries  
+14. As a researcher, I want to manually spot-check 10–15 queries  
     so that I can catch subtle issues the automated metrics might miss.
