@@ -1,0 +1,9 @@
+biopython
+fastapi
+qdrant-client
+uvicorn
+pyyaml
+tqdm
+pytest
+langchain
+langgraph
