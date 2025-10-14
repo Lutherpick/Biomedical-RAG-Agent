@@ -126,7 +126,7 @@ def xml_to_jsonl(xml_bytes: bytes, out_path: Path):
     out.close()
 
 if __name__ == "__main__":
-    pmids = search_ids(QUERY, n=3000, step=200)
+    pmids = search_ids(QUERY, n=3000 , step=200)
     print(f"Fetched {len(pmids)} PMIDs")
 
     xml_bytes = fetch_xml_batched(pmids, batch=200)
