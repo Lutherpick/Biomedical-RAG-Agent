@@ -1,0 +1,20 @@
+@'
+# Python
+__pycache__/
+*.pyc
+
+# Local env & logs
+.env
+logs/*.jsonl
+
+# Generated data/chunks
+data/processed/chunks/*.json
+data_pipeline/data/processed/chunks/*.json
+
+# OS
+.DS_Store
+Thumbs.db
+'@ | Out-File -Encoding utf8 .gitignore
+
+git add .gitignore
+git commit -m "chore: add .gitignore for caches, logs, and generated chunks"
