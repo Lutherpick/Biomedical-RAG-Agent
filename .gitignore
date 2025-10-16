@@ -1,3 +1,11 @@
+
+
+#ignores from thu member luke
+models
+.venv
+
+
+
 # Byte-compiled / optimized / DLL files
 __pycache__/
 *.py[codz]

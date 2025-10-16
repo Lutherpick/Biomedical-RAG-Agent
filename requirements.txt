@@ -1,0 +1,5 @@
+langchain-text-splitters==0.3.11
+langchain_experimental==0.3.4
+langchain_huggingface==0.3.1
+langgraph==0.6.10
+sentence-transformers==5.1.1
