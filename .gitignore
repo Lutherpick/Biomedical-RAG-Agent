@@ -26,3 +26,9 @@ qdrant_storage/
 .idea/
 .vscode/
 *.iml
+data_pipeline/data/
+qdrant_storage/
+logs/
+__pycache__/
+*.pyc
+
