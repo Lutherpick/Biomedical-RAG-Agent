@@ -4,25 +4,38 @@ from pathlib import Path
 from typing import Dict, Any, List
 from lxml import etree as ET
 from Bio import Entrez
-import csv, json, os, sys, time, datetime as dt
-from multiprocessing import Pool, Lock, Manager
+import csv, os, sys, time, datetime as dt
 
 # ---------- NCBI identity ----------
 Entrez.email   = os.getenv("NCBI_EMAIL",   "bazefi01@thu.de")
 Entrez.tool    = os.getenv("NCBI_TOOL",    "biomed-rag-ingester")
 Entrez.api_key = os.getenv("NCBI_API_KEY")
 
-# ---------- Base Query ----------
+# ---------- Base Query (as documented: OA, animals/preclinical) ----------
+# build_open_access_corpus.py
+
 QUERY_BASE = (
     '("Animal Experimentation"[MeSH] OR "Models, Animal"[MeSH] OR "Disease Models, Animal"[MeSH] '
     'OR "Preclinical Studies as Topic"[MeSH] OR "Drug Evaluation, Preclinical"[MeSH] '
     'OR "Toxicity Tests"[MeSH] OR "In Vivo Techniques"[MeSH]) '
     'AND (Animals[mh] NOT Humans[mh]) '
-    'AND ("animal experiment*"[tiab] OR "animal model*"[tiab] OR "preclinical"[tiab] '
-    'OR "in vivo"[tiab] OR mouse[tiab] OR mice[tiab] OR rat[tiab] OR rats[tiab] OR rabbit[tiab] '
-    'OR rabbits[tiab] OR dog[tiab] OR dogs[tiab] OR canine[tiab] OR pig[tiab] OR pigs[tiab] '
-    'OR swine[tiab] OR porcine[tiab] OR sheep[tiab] OR ovine[tiab] OR cattle[tiab] OR bovine[tiab] '
-    'OR zebrafish[tiab] OR xenopus[tiab] OR "chick embryo"[tiab]) '
+    # ▼ add the tiab/species block you pasted ▼
+    'AND ('
+    '"animal experiment*"[tiab] OR '
+    '"animal model*"[tiab] OR '
+    '"preclinical"[tiab] OR '
+    '"in vivo"[tiab] OR '
+    'mouse[tiab] OR mice[tiab] OR '
+    'rat[tiab] OR rats[tiab] OR '
+    'rabbit[tiab] OR rabbits[tiab] OR '
+    'dog[tiab] OR dogs[tiab] OR canine[tiab] OR '
+    'pig[tiab] OR pigs[tiab] OR swine[tiab] OR porcine[tiab] OR '
+    'sheep[tiab] OR ovine[tiab] OR '
+    'cattle[tiab] OR bovine[tiab] OR '
+    'zebrafish[tiab] OR '
+    'xenopus[tiab] OR '
+    '"chick embryo"[tiab]'
+    ') '
     'AND hasabstract[text] '
     'AND (english[lang] OR german[lang]) '
     'AND free full text[sb]'
@@ -36,80 +49,48 @@ MANIFESTS = DATA_ROOT / "manifests"
 OUT_BASE.mkdir(parents=True, exist_ok=True)
 MANIFESTS.mkdir(parents=True, exist_ok=True)
 MANIFEST_CSV = MANIFESTS / "oa_manifest.csv"
+RUN_INFO_TXT = MANIFESTS / "oa_manifest_runinfo.txt"
 
 def log(*a): print(*a, file=sys.stderr, flush=True)
 
-# ---------- Utilities ----------
-def esearch_ids(term: str, mindate: str, maxdate: str) -> List[str]:
-    """Return all PMIDs for a given date slice."""
-    ids, retstart = [], 0
-    while True:
-        try:
-            with Entrez.esearch(
-                    db="pubmed", term=term,
-                    datetype="pdat", mindate=mindate, maxdate=maxdate,
-                    retstart=retstart, retmax=10000, usehistory="n", retmode="xml"
-            ) as h:
-                data = Entrez.read(h)
-            new = list(map(str, data.get("IdList", [])))
-            if not new: break
-            ids.extend(new)
-            if len(new) < 10000: break
-            retstart += 10000
-            time.sleep(0.2)
-        except Exception as e:
-            log(f"[esearch error] {e}")
-            time.sleep(2)
-            continue
-    return ids
+COLS = [
+    "pmid","pmcid","doi","title","journal","publication_date","language",
+    "url_source","publisher_url","open_access",
+    "metadata_file","abstract_file","fulltext_file"
+]
 
-def efetch_pubmed_batch(ids: List[str], retries: int = 3) -> bytes:
-    """Fetch metadata+abstract XML for up to 10k PMIDs."""
-    for _ in range(retries):
-        try:
-            with Entrez.efetch(db="pubmed", id=",".join(ids), retmode="xml") as h:
-                return h.read()
-        except Exception as e:
-            log(f"[efetch error: {e}] retrying...")
-            time.sleep(2)
-    return b""
+def ensure_manifest():
+    if not MANIFEST_CSV.exists():
+        with MANIFEST_CSV.open("w", newline="", encoding="utf-8") as f:
+            csv.DictWriter(f, fieldnames=COLS).writeheader()
 
-def extract_records(pubmed_xml: bytes) -> List[ET._Element]:
-    if not pubmed_xml: return []
-    root = ET.fromstring(pubmed_xml)
-    return root.findall(".//PubmedArticle")
+def append_manifest(rows: List[Dict[str, str]]):
+    ensure_manifest()
+    with MANIFEST_CSV.open("a", newline="", encoding="utf-8") as f:
+        w = csv.DictWriter(f, fieldnames=COLS)
+        for r in rows:
+            for c in COLS: r.setdefault(c, "")
+            w.writerow({c: r[c] for c in COLS})
 
-def text(node, xpath):
+def text(node: ET._Element, xpath: str) -> str:
     n = node.find(xpath)
     return "" if n is None else "".join(n.itertext()).strip()
 
-def list_text(nodes):
-    return ["".join(n.itertext()).strip() for n in nodes]
-
-# ---------- Parsing ----------
-def parse_pubmed_article(art: ET._Element) -> Dict[str, Any]:
+def parse_one_pubmed_article(art: ET._Element) -> Dict[str, str]:
     pmid = text(art, ".//PMID")
     title = text(art, ".//ArticleTitle")
     journal = text(art, ".//Journal/Title")
     pub_year = text(art, ".//PubDate/Year") or text(art, ".//JournalIssue/PubDate/Year")
     lang = text(art, ".//Language") or "en"
 
-    authors = []
-    for a in art.findall(".//AuthorList/Author"):
-        last, fore = text(a, "./LastName"), text(a, "./ForeName")
-        full = " ".join([fore, last]).strip() or text(a, "./CollectiveName")
-        if full: authors.append(full)
-
     doi, pmcid = "", ""
     for aid in art.findall(".//ArticleIdList/ArticleId"):
         t = (aid.get("IdType") or "").lower()
-        if t == "doi": doi = aid.text or ""
-        if t == "pmcid": pmcid = aid.text or ""
+        if t == "doi": doi = (aid.text or "").strip()
+        if t == "pmcid": pmcid = (aid.text or "").strip()
 
-    mesh = [(mh.text or "").strip() for mh in art.findall(".//MeshHeading/DescriptorName") if mh.text]
-    abs_paras = list_text(art.findall(".//Abstract/AbstractText"))
-    abstract = "\n\n".join(abs_paras)
-    publisher_url = f"https://doi.org/{doi}" if doi else ""
+    abstract_paras = ["".join(p.itertext()).strip() for p in art.findall(".//Abstract/AbstractText")]
+    abstract = "\n\n".join([p for p in abstract_paras if p])
 
     return {
         "pmid": pmid,
@@ -119,87 +100,118 @@ def parse_pubmed_article(art: ET._Element) -> Dict[str, Any]:
         "journal": journal,
         "publication_date": f"date_year_{pub_year}" if pub_year else "",
         "language": "language_german" if lang.lower().startswith("ger") else "language_english",
-        "authors_full": authors,
-        "mesh_terms": mesh,
-        "url_source": f"https://pubmed.ncbi.nlm.nih.gov/{pmid}/",
-        "publisher_url": publisher_url,
-        "kind": "doc_non-curated",
-        "open_access": True
-    }, abstract
+        "abstract": abstract,
+        "publisher_url": f"https://doi.org/{doi}" if doi else "",
+    }
 
-# ---------- Saving ----------
-def save_per_pmid(rec: Dict[str, Any], abstract: str) -> Dict[str, Any]:
-    pmid = rec["pmid"]
-    d = OUT_BASE / f"PMID_{pmid}"
-    d.mkdir(parents=True, exist_ok=True)
-    m = d / "metadata.json"
-    a = d / "abstract.txt"
-    m.write_text(json.dumps(rec, ensure_ascii=False, indent=2), encoding="utf-8")
-    a.write_text(abstract or "", encoding="utf-8")
-    rec["metadata_file"] = str(m.relative_to(DATA_ROOT))
-    rec["abstract_file"] = str(a.relative_to(DATA_ROOT))
-    return rec
+def run(start_date="2010/01/01", end_date="2025/12/31"):
+    # split by publication year to stay under API limits
+    start_y = int(start_date.split("/")[0])
+    end_y   = int(end_date.split("/")[0])
+    BATCH   = 10000
+    append_rows: List[Dict[str,str]] = []
 
-# ---------- Manifest ----------
-def write_manifest(rows: List[Dict[str, Any]]):
-    cols = [
-        "pmid", "pmcid", "doi", "title", "journal", "publication_date", "language",
-        "url_source", "publisher_url", "open_access",
-        "metadata_file", "abstract_file", "fulltext_file"
-    ]
-    exists = MANIFEST_CSV.exists()
-    with MANIFEST_CSV.open("a", newline="", encoding="utf-8") as f:
-        w = csv.DictWriter(f, fieldnames=cols)
-        if not exists:
-            w.writeheader()
-        for row in rows:
-            for c in cols:
-                row.setdefault(c, "")
-            w.writerow({c: row[c] for c in cols})
+    for year in range(start_y, end_y + 1):
+        log(f"[esearch] {year} (usehistory=Y)")
+        with Entrez.esearch(
+                db="pubmed",
+                term=QUERY_BASE,
+                datetype="pdat",
+                mindate=f"{year}/01/01",
+                maxdate=f"{year}/12/31",
+                usehistory="y",
+                retmode="xml",
+                retmax=0
+        ) as h:
+            data = Entrez.read(h)
 
-# ---------- Worker ----------
-def process_batch(batch):
-    xml = efetch_pubmed_batch(batch)
-    arts = extract_records(xml)
-    out = []
-    for art in arts:
-        meta, abs_txt = parse_pubmed_article(art)
-        meta = save_per_pmid(meta, abs_txt)
-        out.append(meta)
-    return out
+        count  = int(data.get("Count", 0))
+        webenv = data.get("WebEnv")
+        qkey   = data.get("QueryKey")
+        if count == 0 or not webenv or not qkey:
+            log(f"[{year}] nothing found"); continue
 
-# ---------- Main ----------
-def run(target: int = 20000, start_date="2010/01/01", end_date="2025/12/31"):
-    start = dt.datetime.strptime(start_date, "%Y/%m/%d").date()
-    end = dt.datetime.strptime(end_date, "%Y/%m/%d").date()
-    saved = 0
+        log(f"[{year}] Count={count} WebEnv={webenv} QueryKey={qkey}")
 
-    for year in range(start.year, end.year + 1):
-        mindate, maxdate = f"{year}/01/01", f"{year}/12/31"
-        ids = esearch_ids(QUERY_BASE, mindate, maxdate)
-        if not ids:
-            continue
-        log(f"[{year}] Found {len(ids)} PMIDs")
-
-        chunks = [ids[i:i + 5000] for i in range(0, len(ids), 5000)]
-        with Pool(processes=6) as pool:
-            for result in pool.imap_unordered(process_batch, chunks):
-                write_manifest(result)
-                saved += len(result)
-                if saved >= target:
+        fetched = 0
+        while fetched < count:
+            retmax = min(BATCH, count - fetched)
+            log(f"[efetch] {year} {fetched}..{fetched+retmax-1} / {count}")
+            tries = 0
+            while True:
+                try:
+                    with Entrez.efetch(
+                            db="pubmed",
+                            query_key=qkey,
+                            WebEnv=webenv,
+                            rettype="xml",
+                            retmode="xml",
+                            retstart=fetched,
+                            retmax=retmax,
+                            api_key=Entrez.api_key,
+                            email=Entrez.email
+                    ) as h:
+                        xml_bytes = h.read()
                     break
-        if saved >= target:
-            break
+                except Exception as e:
+                    tries += 1
+                    log(f"[efetch error] {e} (retry {tries}/3)")
+                    time.sleep(2)
+                    if tries >= 3:
+                        log(f"[efetch skipped range {fetched}..{fetched+retmax-1}]")
+                        xml_bytes = b""
+                        break
 
-    log(f"[done] Saved {saved} records → {OUT_BASE}")
-    log(f"[manifest] {MANIFEST_CSV}")
+            if not xml_bytes:
+                fetched += retmax
+                continue
 
-# ---------- CLI ----------
+            root = ET.fromstring(xml_bytes)
+            for art in root.findall(".//PubmedArticle"):
+                pmid_el = art.find(".//PMID")
+                pmid = pmid_el.text.strip() if pmid_el is not None else None
+                if not pmid: continue
+                d = OUT_BASE / f"PMID_{pmid}"
+                d.mkdir(parents=True, exist_ok=True)
+                (d / "metadata.xml").write_bytes(
+                    ET.tostring(art, encoding="utf-8", xml_declaration=True)
+                )
+                rec = parse_one_pubmed_article(art)
+                (d / "abstract.txt").write_text(rec["abstract"], encoding="utf-8")
+                row = {
+                    "pmid": rec["pmid"],
+                    "pmcid": rec["pmcid"],
+                    "doi": rec["doi"],
+                    "title": rec["title"],
+                    "journal": rec["journal"],
+                    "publication_date": rec["publication_date"],
+                    "language": rec["language"],
+                    "url_source": f"https://pubmed.ncbi.nlm.nih.gov/{rec['pmid']}/",
+                    "publisher_url": rec["publisher_url"],
+                    "open_access": "True",
+                    "metadata_file": str((d / "metadata.xml").relative_to(DATA_ROOT)),
+                    "abstract_file": str((d / "abstract.txt").relative_to(DATA_ROOT)),
+                    "fulltext_file": ""
+                }
+                append_rows.append(row)
+
+            fetched += retmax
+            time.sleep(0.3)
+
+            if len(append_rows) >= 2000:
+                append_manifest(append_rows)
+                append_rows.clear()
+
+        # flush yearly
+        if append_rows:
+            append_manifest(append_rows)
+            append_rows.clear()
+        log(f"[{year}] finished -> manifest updated")
+
 if __name__ == "__main__":
     import argparse
     ap = argparse.ArgumentParser()
-    ap.add_argument("--target", type=int, default=20000)
     ap.add_argument("--start_date", type=str, default="2010/01/01")
     ap.add_argument("--end_date", type=str, default="2025/12/31")
     args = ap.parse_args()
-    run(target=args.target, start_date=args.start_date, end_date=args.end_date)
+    run(start_date=args.start_date, end_date=args.end_date)
