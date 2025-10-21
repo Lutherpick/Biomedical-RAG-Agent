@@ -1,34 +1,9 @@
-# --- Python cache ---
-__pycache__/
-*.pyc
-
-# --- Virtual environment ---
+# venv
 .venv/
-.env/
 
-# --- Data & temp outputs ---
-data_pipeline/data/
-data_pipeline/logs/
+# secrets
+.env
+
+# large runtime data
+data/
 qdrant_storage/
-*.json
-*.jsonl
-*.csv
-*.gz
-*.zip
-*.tar
-*.xml
-*.jpg
-*.png
-*.tif
-*.pdf
-
-# --- IDEs ---
-.idea/
-.vscode/
-*.iml
-data_pipeline/data/
-qdrant_storage/
-logs/
-__pycache__/
-*.pyc
-
