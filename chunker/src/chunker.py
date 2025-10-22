@@ -35,7 +35,7 @@ def loadModel(modelName,modelPath,minChunkSize=400) -> text_splitter.SemanticChu
 
     return model
 
-def downloadModel(modelName,folderPath="./models/"):
+def downloadModel(modelName,folderPath="./../models/"):
 
     dir =Path(folderPath+modelName)
     #hf_hub_download(repo_id=modelName,local_dir=folderPath)
@@ -44,7 +44,7 @@ def downloadModel(modelName,folderPath="./models/"):
 
 def getModel(modelName,minChunkSize=400):
     downloadModel(modelName)
-    mod=loadModel(modelName=modelName,modelPath="./models/",minChunkSize=minChunkSize)
+    mod=loadModel(modelName=modelName,modelPath="./../models/",minChunkSize=minChunkSize)
     return mod
 
 
