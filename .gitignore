@@ -6,4 +6,7 @@
 
 # large runtime data
 data/
+out/
+scripts/
+tests/
 qdrant_storage/
