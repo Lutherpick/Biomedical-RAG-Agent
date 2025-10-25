@@ -8,7 +8,7 @@ from typing_extensions import TypedDict
 from langgraph.graph import StateGraph, START, END
 
 
-import chunker.src.chunker as chunker
+import pmc_chunker.src.chunker as chunker
 
 #ranked by performance/quality
 mod=["sentence-transformers/embeddinggemma-300m-medical","sentence-transformers/all-MiniLM-L6-v2","sentence-transformers/msmarco-MiniLM-L12-v3","sentence-transformers/all-MiniLM-L12-v2","sentence-transformers/all-mpnet-base-v2"]
