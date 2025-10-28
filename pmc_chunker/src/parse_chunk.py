@@ -9,6 +9,9 @@ import chunker
 
 
 
+def getXML(name,path="./pmc_chunker/data/xml/"):
+    f=open(path+name)
+    return f
 
 def chunkLimitDocLimit(MaxChunks,MaxDocuments,totalchunks,totalDocuments) -> bool:
     if(MaxChunks <= totalchunks or MaxDocuments <= totalDocuments):
@@ -20,7 +23,7 @@ def chunkLimitDocLimit(MaxChunks,MaxDocuments,totalchunks,totalDocuments) -> boo
 
 def parseXMLSection(MaxChunks,MaxDocuments,chunkSize):
 
-    dataframe=pd.read_csv("/home/luke-weiss/dev/Biomedical-RAG-Agent/pmc_chunker/out/manifest_4000.csv")
+    dataframe=pd.read_csv("./pmc_chunker/out/manifest_4000.csv")
 
 
     totalchunks=0
@@ -28,8 +31,9 @@ def parseXMLSection(MaxChunks,MaxDocuments,chunkSize):
 
     dfs=[]
     for index,pmcId in enumerate(dataframe.iloc[:,0]):
-    
-        f = open("/home/luke-weiss/dev/Biomedical-RAG-Agent/pmc_chunker/data/xml/"+pmcId+".xml")
+        #f = open("./pmc_chunker/data/xml/"+pmcId+".xml")
+        f = getXML(pmcId+".xml")
+        
         xml=f.read()
         root = etree.fromstring(xml)
 
@@ -137,7 +141,7 @@ def chunkSection(sec,dataframe,index,chunkIndex):
 
 def parseXMLSectionParagraph(MaxChunks,MaxDocuments,minchunkSize):
 
-    dataframe=pd.read_csv("/home/luke-weiss/dev/Biomedical-RAG-Agent/pmc_chunker/out/manifest_4000.csv")
+    dataframe=pd.read_csv("./pmc_chunker/out/manifest_4000.csv")
 
 
     totalchunks=0
@@ -146,7 +150,9 @@ def parseXMLSectionParagraph(MaxChunks,MaxDocuments,minchunkSize):
     dfs=[]
     for index,pmcId in enumerate(dataframe.iloc[:,0]):
     
-        f = open("/home/luke-weiss/dev/Biomedical-RAG-Agent/pmc_chunker/data/xml/"+pmcId+".xml")
+        #f = open("./pmc_chunker/data/xml/"+pmcId+".xml")
+        f = getXML(pmcId+".xml")
+        
         xml=f.read()
         root = etree.fromstring(xml)
 
@@ -284,7 +290,7 @@ def chunkSectionToParagraph(sec,dataframe,index,chunkIndex,minchunkSize):
 
 def parseXMLSectionParagraphModel(MaxChunks,MaxDocuments,minchunkSize,chunkingModel):
 
-    dataframe=pd.read_csv("/home/luke-weiss/dev/Biomedical-RAG-Agent/pmc_chunker/out/manifest_4000.csv")
+    dataframe=pd.read_csv("./pmc_chunker/out/manifest_4000.csv")
 
 
     totalchunks=0
@@ -293,7 +299,9 @@ def parseXMLSectionParagraphModel(MaxChunks,MaxDocuments,minchunkSize,chunkingMo
     dfs=[]
     for index,pmcId in enumerate(dataframe.iloc[:,0]):
     
-        f = open("/home/luke-weiss/dev/Biomedical-RAG-Agent/pmc_chunker/data/xml/"+pmcId+".xml")
+        #f = open("./pmc_chunker/data/xml/"+pmcId+".xml")
+        f = getXML(pmcId+".xml")
+        
         xml=f.read()
         root = etree.fromstring(xml)
 
@@ -435,6 +443,6 @@ if __name__ == '__main__':
 
     #parseXMLSectionParagraph(100000,4000,700)
 
-    chk=chunker.getFixedChunker(700)
+    chk=chunker.getFixedChunker(2000)
     #chk=chunker.getModel("sentence-transformers/all-MiniLM-L6-v2")
-    parseXMLSectionParagraphModel(100000,15,700,chk)
+    parseXMLSectionParagraphModel(100000,15,2000,chk)
