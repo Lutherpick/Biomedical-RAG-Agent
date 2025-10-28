@@ -1,13 +1,24 @@
 import pandas as pd
 from lxml import etree
-import tokenizers
-import json
-import tqdm
-import pandas
-import numpy
 import chunker
+import os
 
 
+def getDataframe(path,xmlFolder=False):
+    
+    names=[]
+    frame=None
+
+    if xmlFolder:
+        for filename in os.listdir(path):
+            if not filename.endswith('.xml'): continue
+            names.append(os.path.splitext(filename)[0])
+        
+
+        frame = pd.DataFrame(names, columns=['PMCID'])
+    else:
+        frame=pd.read_csv(path)
+    return frame
 
 def getXML(name,path="./pmc_chunker/data/xml/"):
     f=open(path+name)
@@ -19,18 +30,43 @@ def chunkLimitDocLimit(MaxChunks,MaxDocuments,totalchunks,totalDocuments) -> boo
     else:
         return False
 
+def getMeta(root,dataframe,index):
+    metadata={
+        "PMID": int(root.xpath("//article-meta/article-id[@pub-id-type=\"pmid\"]/text()")[0]),
+        "PMCID":"PMC" +root.xpath("//article-meta/article-id[@pub-id-type=\"pmc\"]/text()")[0],
+        #"doi":root.xpath(".//article-meta/article-id[@pub-id-type=\"doi\"]")[0].text,
+        "doi":root.findtext(".//article-meta/article-id[@pub-id-type=\"doi\"]"),
+        "journal":root.xpath("//article//journal-title/text()")[0],
+        "year":int(root.xpath("//article//year/text()")[0]),
+        "article-title":" ".join(root.xpath("//article-meta//article-title/text()")),
+        #"topic":dataframe.loc[index,"topic"]
+        "topic":None
+    }
 
 
-def parseXMLSection(MaxChunks,MaxDocuments,chunkSize):
+    # metadata={
+    #     "PMCID":dataframe.PMCID.get(index,None),
+    #     "PMID":dataframe.PMID.get(index,None),
+    #     "doi":dataframe.doi.get(index,None),
+    #     "journal":dataframe.journal.get(index,None),
+    #     "year":dataframe.year.get(index,None),
+    #     "topic":dataframe.topic.get(index,None),
+    #     "article-title":dataframe.title.get(index,None),
+    # }
 
-    dataframe=pd.read_csv("./pmc_chunker/out/manifest_4000.csv")
+
+    return metadata
+
+
+
+def parseXMLSection(sourceFileFrame,MaxChunks,MaxDocuments,chunkSize):
 
 
     totalchunks=0
     totalDocuments=0
 
     dfs=[]
-    for index,pmcId in enumerate(dataframe.iloc[:,0]):
+    for index,pmcId in enumerate(sourceFileFrame["PMCID"]):
         #f = open("./pmc_chunker/data/xml/"+pmcId+".xml")
         f = getXML(pmcId+".xml")
         
@@ -45,6 +81,9 @@ def parseXMLSection(MaxChunks,MaxDocuments,chunkSize):
             continue
 
 
+
+        metadata=getMeta(root,sourceFileFrame,index)
+
         chunkIndex=0
         
         for sec in abstract.xpath(".//sec"):
@@ -55,7 +94,7 @@ def parseXMLSection(MaxChunks,MaxDocuments,chunkSize):
             #        continue
             #    abstractText=abstractText+text.text
 
-            data=chunkSection(sec,dataframe,index,chunkIndex)
+            data=chunkSection(sec,metadata,chunkIndex)
             dfs.append(pd.DataFrame(data))
             chunkIndex=chunkIndex+1
             totalchunks=totalchunks+1
@@ -67,14 +106,14 @@ def parseXMLSection(MaxChunks,MaxDocuments,chunkSize):
 
             if len(sec.xpath(".//sec[not(descendant::sec)]")) == 0:
 
-                data=chunkSection(sec,dataframe,index,chunkIndex)
+                data=chunkSection(sec,metadata,chunkIndex)
 
                 dfs.append(pd.DataFrame(data))
                 chunkIndex=chunkIndex+1
                 totalchunks=totalchunks+1
 
             for descendantSec in sec.xpath(".//sec[not(descendant::sec)]"):
-                data=chunkSection(descendantSec,dataframe,index,chunkIndex)
+                data=chunkSection(descendantSec,metadata,chunkIndex)
 
                 dfs.append(pd.DataFrame(data))
                 chunkIndex=chunkIndex+1
@@ -96,7 +135,7 @@ def parseXMLSection(MaxChunks,MaxDocuments,chunkSize):
     #print(dfs)
     df.to_json('./pmc_chunker/out/chunks.json', orient='records', lines=True)
 
-def chunkSection(sec,dataframe,index,chunkIndex):
+def chunkSection(sec,metadata,chunkIndex):
     
     sectionText=""
     for text in sec.xpath(".//p"):
@@ -111,13 +150,13 @@ def chunkSection(sec,dataframe,index,chunkIndex):
     #print(dataframe.loc[index,["topic"]])
 
     data={
-        "PMCID":[dataframe.loc[index,"PMCID"]],
-        "PMID":[dataframe.loc[index,"PMID"]],
-        "doi":[dataframe.loc[index,"doi"]],
-        "journal":[dataframe.loc[index,"journal"]],
-        "year":[dataframe.loc[index,"year"]],
-        "topic":[dataframe.loc[index,"topic"]],
-        "article-title": [dataframe.loc[index,"title"]],
+        "PMCID":[metadata["PMCID"]],
+        "PMID":[metadata["PMID"]],
+        "doi":[metadata["doi"]],
+        "journal":[metadata["journal"]],
+        "year":[metadata["year"]],
+        "topic":[metadata["topic"]],
+        "article-title": [metadata["article-title"]],
         "section_type": [sec.attrib.get('sec-type')],
         "section_id": [sec.attrib.get('id')],
         "section_title": [titSec],
@@ -139,16 +178,14 @@ def chunkSection(sec,dataframe,index,chunkIndex):
 
 
 
-def parseXMLSectionParagraph(MaxChunks,MaxDocuments,minchunkSize):
-
-    dataframe=pd.read_csv("./pmc_chunker/out/manifest_4000.csv")
+def parseXMLSectionParagraph(sourceFileFrame,MaxChunks,MaxDocuments,minchunkSize):
 
 
     totalchunks=0
     totalDocuments=0
 
     dfs=[]
-    for index,pmcId in enumerate(dataframe.iloc[:,0]):
+    for index,pmcId in enumerate(sourceFileFrame["PMCID"]):
     
         #f = open("./pmc_chunker/data/xml/"+pmcId+".xml")
         f = getXML(pmcId+".xml")
@@ -164,6 +201,10 @@ def parseXMLSectionParagraph(MaxChunks,MaxDocuments,minchunkSize):
             continue
 
 
+        metadata=getMeta(root,sourceFileFrame,index)
+
+
+
         chunkIndex=0
         
         for sec in abstract.xpath(".//sec"):
@@ -174,7 +215,7 @@ def parseXMLSectionParagraph(MaxChunks,MaxDocuments,minchunkSize):
             #        continue
             #    abstractText=abstractText+text.text
 
-            data=chunkSection(sec,dataframe,index,chunkIndex)
+            data=chunkSection(sec,metadata,chunkIndex)
             dfs.append(pd.DataFrame(data))
             chunkIndex=chunkIndex+1
             totalchunks=totalchunks+1
@@ -186,7 +227,7 @@ def parseXMLSectionParagraph(MaxChunks,MaxDocuments,minchunkSize):
 
             if len(sec.xpath(".//sec[not(descendant::sec)]")) == 0:
 
-                data=chunkSectionToParagraph(sec,dataframe,index,chunkIndex,minchunkSize)
+                data=chunkSectionToParagraph(sec,metadata,chunkIndex,minchunkSize)
                 dfs.extend(data)
                 chunkIndex=chunkIndex+len(data)
                 totalchunks=totalchunks+len(data)
@@ -195,7 +236,7 @@ def parseXMLSectionParagraph(MaxChunks,MaxDocuments,minchunkSize):
                     break
 
             for descendantSec in sec.xpath(".//sec[not(descendant::sec)]"):
-                data=chunkSectionToParagraph(descendantSec,dataframe,index,chunkIndex,minchunkSize)
+                data=chunkSectionToParagraph(descendantSec,metadata,chunkIndex,minchunkSize)
                 dfs.extend(data)
                 chunkIndex=chunkIndex+len(data)
                 totalchunks=totalchunks+len(data)
@@ -217,7 +258,7 @@ def parseXMLSectionParagraph(MaxChunks,MaxDocuments,minchunkSize):
     #print(dfs)
     df.to_json('./pmc_chunker/out/chunks.json', orient='records', lines=True)
 
-def chunkSectionToParagraph(sec,dataframe,index,chunkIndex,minchunkSize):
+def chunkSectionToParagraph(sec,metadata,chunkIndex,minchunkSize):
     #https://medium.com/@larry.prestosa/speed-improvement-in-pandas-loop-df111f3f45ed
 
     dfs=[]
@@ -249,13 +290,13 @@ def chunkSectionToParagraph(sec,dataframe,index,chunkIndex,minchunkSize):
 
 
         data={
-            "PMCID":[dataframe.loc[index,"PMCID"]],
-            "PMID":[dataframe.loc[index,"PMID"]],
-            "doi":[dataframe.loc[index,"doi"]],
-            "journal":[dataframe.loc[index,"journal"]],
-            "year":[dataframe.loc[index,"year"]],
-            "topic":[dataframe.loc[index,"topic"]],
-            "article-title": [dataframe.loc[index,"title"]],
+            "PMCID":[metadata["PMCID"]],
+            "PMID":[metadata["PMID"]],
+            "doi":[metadata["doi"]],
+            "journal":[metadata["journal"]],
+            "year":[metadata["year"]],
+            "topic":[metadata["topic"]],
+            "article-title": [metadata["article-title"]],
             "section_type": [sec.attrib.get('sec-type')],
             "section_id": [str(sec.attrib.get('id'))],
             "section_title": [titSec],
@@ -288,16 +329,16 @@ def chunkSectionToParagraph(sec,dataframe,index,chunkIndex,minchunkSize):
 
 
 
-def parseXMLSectionParagraphModel(MaxChunks,MaxDocuments,minchunkSize,chunkingModel):
+def parseXMLSectionParagraphModel(sourceFileFrame,MaxChunks,MaxDocuments,minchunkSize,chunkingModel):
 
-    dataframe=pd.read_csv("./pmc_chunker/out/manifest_4000.csv")
-
+    
 
     totalchunks=0
     totalDocuments=0
 
+
     dfs=[]
-    for index,pmcId in enumerate(dataframe.iloc[:,0]):
+    for index,pmcId in enumerate(sourceFileFrame["PMCID"]):
     
         #f = open("./pmc_chunker/data/xml/"+pmcId+".xml")
         f = getXML(pmcId+".xml")
@@ -313,6 +354,15 @@ def parseXMLSectionParagraphModel(MaxChunks,MaxDocuments,minchunkSize,chunkingMo
             continue
 
 
+        
+        metadata=getMeta(root,sourceFileFrame,index)
+
+ 
+
+
+
+
+
         chunkIndex=0
         
         for sec in abstract.xpath(".//sec"):
@@ -323,7 +373,7 @@ def parseXMLSectionParagraphModel(MaxChunks,MaxDocuments,minchunkSize,chunkingMo
             #        continue
             #    abstractText=abstractText+text.text
 
-            data=chunkSection(sec,dataframe,index,chunkIndex)
+            data=chunkSection(sec,metadata,chunkIndex)
             dfs.append(pd.DataFrame(data))
             chunkIndex=chunkIndex+1
             totalchunks=totalchunks+1
@@ -335,7 +385,7 @@ def parseXMLSectionParagraphModel(MaxChunks,MaxDocuments,minchunkSize,chunkingMo
 
             if len(sec.xpath(".//sec[not(descendant::sec)]")) == 0:
 
-                data=chunkSectionParagraphwModel(sec,dataframe,index,chunkIndex,minchunkSize,chunkingModel)
+                data=chunkSectionParagraphwModel(sec,metadata,chunkIndex,minchunkSize,chunkingModel)
                 dfs.extend(data)
                 chunkIndex=chunkIndex+len(data)
                 totalchunks=totalchunks+len(data)
@@ -344,7 +394,7 @@ def parseXMLSectionParagraphModel(MaxChunks,MaxDocuments,minchunkSize,chunkingMo
                     break
 
             for descendantSec in sec.xpath(".//sec[not(descendant::sec)]"):
-                data=chunkSectionParagraphwModel(descendantSec,dataframe,index,chunkIndex,minchunkSize,chunkingModel)
+                data=chunkSectionParagraphwModel(descendantSec,metadata,chunkIndex,minchunkSize,chunkingModel)
                 dfs.extend(data)
                 chunkIndex=chunkIndex+len(data)
                 totalchunks=totalchunks+len(data)
@@ -366,7 +416,7 @@ def parseXMLSectionParagraphModel(MaxChunks,MaxDocuments,minchunkSize,chunkingMo
     #print(dfs)
     df.to_json('./pmc_chunker/out/chunks.json', orient='records', lines=True)
 
-def chunkSectionParagraphwModel(sec,dataframe,index,chunkIndex,minchunkSize,chunkingModel):
+def chunkSectionParagraphwModel(sec,metadata,chunkIndex,minchunkSize,chunkingModel):
     #https://medium.com/@larry.prestosa/speed-improvement-in-pandas-loop-df111f3f45ed
 
     dfs=[]
@@ -400,13 +450,13 @@ def chunkSectionParagraphwModel(sec,dataframe,index,chunkIndex,minchunkSize,chun
         for paragraphText in chunkingModel.split_text(inputText):
 
             data={
-                "PMCID":[dataframe.loc[index,"PMCID"]],
-                "PMID":[dataframe.loc[index,"PMID"]],
-                "doi":[dataframe.loc[index,"doi"]],
-                "journal":[dataframe.loc[index,"journal"]],
-                "year":[dataframe.loc[index,"year"]],
-                "topic":[dataframe.loc[index,"topic"]],
-                "article-title": [dataframe.loc[index,"title"]],
+                "PMCID":[metadata["PMCID"]],
+                "PMID":[metadata["PMID"]],
+                "doi":[metadata["doi"]],
+                "journal":[metadata["journal"]],
+                "year":[metadata["year"]],
+                "topic":[metadata["topic"]],
+                "article-title": [metadata["article-title"]],
                 "section_type": [sec.attrib.get('sec-type')],
                 "section_id": [str(sec.attrib.get('id'))],
                 "section_title": [titSec],
@@ -439,10 +489,15 @@ def getBlankDataframe():
     return pd.DataFrame(columns=["article-title","PMCID","PMID","doi","journal","year","topic","section_type","section_id","section_title","section_path","chunk_text", "section_chunk_id","chunk_index","token_count"])
 
 if __name__ == '__main__':
+
+    #source=getDataframe("./pmc_chunker/out/manifest_4000.csv",False)
+    source=getDataframe("./pmc_chunker/data/xml/",True)
+
+
     #parseXMLSection(1000,4000,340)
 
-    #parseXMLSectionParagraph(100000,4000,700)
+    #parseXMLSectionParagraph(source,100000,1000,700)
 
-    chk=chunker.getFixedChunker(2000)
+    chk=chunker.getFixedChunker(700)
     #chk=chunker.getModel("sentence-transformers/all-MiniLM-L6-v2")
-    parseXMLSectionParagraphModel(100000,15,2000,chk)
+    parseXMLSectionParagraphModel(source,100000,4000,700,chk)
