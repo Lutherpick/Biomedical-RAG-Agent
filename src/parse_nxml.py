@@ -14,28 +14,52 @@ def _all_text(el: Optional[etree._Element]) -> str:
         return ""
     return _norm_text("".join(el.itertext()))
 
-# ---------- path helpers (namespace-agnostic) ----------
+# ---------- path helpers (namespace-agnostic, robust) ----------
 def _lname(el: etree._Element) -> str:
-    q = el.tag
-    return q.split("}")[-1] if "}" in q else q
+    """
+    Return a safe local-name for any node. Handles elements, comments, PIs.
+    """
+    tag = el.tag
+    # Normal element tag -> string or '{ns}local'
+    if isinstance(tag, str):
+        if "}" in tag:
+            return tag.split("}", 1)[1]
+        return tag
+    # lxml uses cython singletons for comments/PIs; provide readable labels
+    try:
+        name = getattr(tag, "__name__", None)
+        if name:
+            return name.lower()
+    except Exception:
+        pass
+    return str(tag).lower()
 
 def _sib_index(el: etree._Element) -> int:
     """1-based index among siblings with same local-name()."""
+    parent = el.getparent()
+    if parent is None:
+        return 1
     name = _lname(el)
     idx = 0
-    for sib in (el.getparent().iterchildren() if el.getparent() is not None else []):
+    for sib in parent.iterchildren():  # elements only
         if _lname(sib) == name:
             idx += 1
         if sib is el:
             return idx
-    return 1
+    return max(1, idx)
 
-def _path_to(el: etree._Element) -> str:
+def _path_to(el: Optional[etree._Element]) -> str:
     """Build a JATS-like, namespace-free path, e.g., /body/sec[1]/sec[2]/p[3]."""
+    if el is None:
+        return "/"
     parts: List[str] = []
     cur = el
-    while cur is not None and _lname(cur) not in ("article",):  # stop at root <article>
-        parts.append(f"{_lname(cur)}[{_sib_index(cur)}]")
+    # Stop at root <article>, ignore comments/PIs gracefully
+    while cur is not None:
+        name = _lname(cur)
+        if name == "article":
+            break
+        parts.append(f"{name}[{_sib_index(cur)}]")
         cur = cur.getparent()
     return "/" + "/".join(reversed(parts))
 
@@ -43,7 +67,7 @@ def _closest_sec_path(el: etree._Element) -> str:
     cur = el
     while cur is not None and _lname(cur) != "sec":
         cur = cur.getparent()
-    return _path_to(cur) if cur is not None else "/"
+    return _path_to(cur)
 
 # ---------- extraction ----------
 def _iter_elements(root: etree._Element) -> Iterable[Tuple[str, etree._Element]]:
@@ -66,7 +90,7 @@ def _iter_elements(root: etree._Element) -> Iterable[Tuple[str, etree._Element]]
     for cap in root.xpath(".//*[local-name()='table-wrap']//*[local-name()='caption']"):
         yield ("table_caption", cap)
 
-    # article-meta/* (subset: article-title, journal-title, year, doi)
+    # article-meta/* (subset)
     am = root.xpath(".//*[local-name()='article-meta']")
     if am:
         meta_root = am[0]

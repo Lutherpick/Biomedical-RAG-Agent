@@ -1,30 +1,53 @@
 #!/usr/bin/env python3
 from __future__ import annotations
-import argparse, json, sys
+import argparse, json, sys, re
 from pathlib import Path
 from typing import List, Dict, Iterable, Tuple
 
-# -------- sentence splitter with fallbacks --------
+# -------- sentence splitter with robust fallbacks --------
 def _get_sentence_splitter():
+    # 1) Fast path: blingfire
     try:
-        import blingfire as bf  # fast
+        import blingfire as bf  # type: ignore
         return lambda s: [t for t in bf.text_to_sentences(s).split("\n") if t.strip()]
     except Exception:
         pass
+    # 2) NLTK (handle punkt + punkt_tab on newer versions)
     try:
         import nltk  # type: ignore
         try:
             nltk.data.find("tokenizers/punkt")
         except LookupError:
             nltk.download("punkt", quiet=True)
-        from nltk.tokenize import sent_tokenize
+        # Newer NLTK separates language tables:
+        try:
+            nltk.data.find("tokenizers/punkt_tab")
+        except LookupError:
+            try:
+                nltk.download("punkt_tab", quiet=True)
+            except Exception:
+                # ok to continue; sent_tokenize works without tables for en
+                pass
+        from nltk.tokenize import sent_tokenize  # type: ignore
         return lambda s: [t for t in sent_tokenize(s) if t.strip()]
     except Exception:
         pass
-    # naive fallback
-    import re
-    rx = re.compile(r"(?<=[.!?])\s+")
-    return lambda s: [t for t in rx.split(s) if t.strip()]
+    # 3) Regex fallback with a few biomedical abbreviations guarded
+    ABBR = r"(?:e\.g|i\.e|et al|Fig|Figs|Dr|Mr|Ms|Prof|Ref|ca|vs|No|Fig\.|Eq|Eq\.|cf)"
+    rx = re.compile(rf"(?<!{ABBR})\.(?=\s+[A-Z])|(?<=[!?])\s+")
+    def _split(s: str) -> List[str]:
+        parts, start = [], 0
+        for m in rx.finditer(s):
+            end = m.end()
+            seg = s[start:end].strip()
+            if seg:
+                parts.append(seg)
+            start = end
+        tail = s[start:].strip()
+        if tail:
+            parts.append(tail)
+        return parts
+    return _split
 
 _SENT_SPLIT = _get_sentence_splitter()
 
@@ -44,7 +67,6 @@ def _count_tokens(text: str) -> int:
 
 # -------- section grouping helpers --------
 def _section_root_from_path(element_path: str, section_path: str) -> str:
-    # We already have a proper section_path like /body/sec[1]/sec[2]; use it directly.
     return section_path or "/"
 
 def _key(rec: Dict) -> Tuple[str, str]:
@@ -52,10 +74,6 @@ def _key(rec: Dict) -> Tuple[str, str]:
 
 # -------- chunking logic --------
 def chunk_sentences_to_token_windows(sents: List[str], max_tokens: int, min_tokens: int, overlap_ratio: float) -> List[str]:
-    """
-    Accumulate sentences into chunks bounded by token count.
-    Use proportional overlap between consecutive chunks (~10% by default).
-    """
     chunks: List[str] = []
     window: List[str] = []
     window_tokens = 0
@@ -73,9 +91,7 @@ def chunk_sentences_to_token_windows(sents: List[str], max_tokens: int, min_toke
 
     for s in sents:
         t = _count_tokens(s)
-        # if a single sentence is longer than max_tokens, force-split by tokens
         if t > max_tokens:
-            # flush current
             flush()
             toks = _ENCODE(s)
             i = 0
@@ -84,11 +100,9 @@ def chunk_sentences_to_token_windows(sents: List[str], max_tokens: int, min_toke
                 piece = _DECODE(toks[i:j])
                 if _count_tokens(piece) >= min_tokens or not chunks:
                     chunks.append(piece)
-                # overlap
                 i = j - ov if j - ov > i else j
             continue
 
-        # normal accumulation
         if window_tokens + t <= max_tokens:
             window.append(s); window_tokens += t
         else:
@@ -97,19 +111,17 @@ def chunk_sentences_to_token_windows(sents: List[str], max_tokens: int, min_toke
 
     flush()
 
-    # apply overlap by reusing tail tokens across windows
     if ov > 0 and len(chunks) > 1:
         out: List[str] = []
-        prev_tail_tokens = []
+        prev_toks = None
         for idx, ch in enumerate(chunks):
-            if idx == 0:
+            if idx == 0 or prev_toks is None:
                 out.append(ch)
             else:
-                # prepend overlap tokens from previous chunk
-                prev_toks = _ENCODE(chunks[idx - 1])
                 tail = prev_toks[-ov:] if len(prev_toks) > ov else prev_toks
-                merged = _DECODE(tail) + " " + ch
-                out.append(merged.strip())
+                merged = (_DECODE(tail) + " " + ch).strip()
+                out.append(merged)
+            prev_toks = _ENCODE(ch)
         chunks = out
     return chunks
 
@@ -134,7 +146,7 @@ def main():
     ap.add_argument("--min-tokens", type=int, default=100)
     ap.add_argument("--overlap", type=float, default=0.10, help="Proportional overlap fraction, e.g., 0.1 for 10%")
     ap.add_argument("--include-types", default="paragraph,fig_caption,table_caption,article_meta",
-                    help="Comma list of element types to include before grouping; default includes all parsed types.")
+                    help="Comma list of element types to include before grouping.")
     args = ap.parse_args()
 
     include = set(t.strip() for t in args.include_types.split(",") if t.strip())
@@ -142,7 +154,6 @@ def main():
     out = Path(args.out)
     out.parent.mkdir(parents=True, exist_ok=True)
 
-    # group by (pmcid, section_path)
     buckets: Dict[Tuple[str,str], List[Dict]] = {}
     for rec in read_jsonl(parsed):
         if rec.get("type") not in include:
@@ -150,18 +161,17 @@ def main():
         k = _key(rec)
         buckets.setdefault(k, []).append(rec)
 
-    # stable order inside each section by element_path
     for k in buckets:
         buckets[k].sort(key=lambda r: r.get("element_path",""))
 
-    # chunk per section
     n_chunks = 0
     with out.open("w", encoding="utf-8") as fh:
         for (pmcid, section_path), items in buckets.items():
-            # concatenate sentences across items while staying inside this section
             sents: List[str] = []
             for r in items:
                 sents.extend(_SENT_SPLIT(r["text"]))
+            if not sents:
+                continue
 
             chunks = chunk_sentences_to_token_windows(
                 sents, max_tokens=args.max_tokens, min_tokens=args.min_tokens, overlap_ratio=args.overlap
