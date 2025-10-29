@@ -12,7 +12,7 @@ from langchain.text_splitter import CharacterTextSplitter
 
 #fixed size chunking
 def getFixedChunker(chunk_size,chunkCountSymbol=' '):
-    splitter = CharacterTextSplitter(chunk_size = chunk_size, chunk_overlap=chunk_size*0.08, separator=chunkCountSymbol, strip_whitespace=False)
+    splitter = CharacterTextSplitter(chunk_size = chunk_size, chunk_overlap=chunk_size*0, separator=chunkCountSymbol, strip_whitespace=False)
     #splitter.split_text("money money 1 2 3 4 5 6 7")
     return splitter
 

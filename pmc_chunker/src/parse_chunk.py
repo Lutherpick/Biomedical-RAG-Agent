@@ -38,10 +38,12 @@ def getMeta(root,dataframe,index):
         "doi":root.findtext(".//article-meta/article-id[@pub-id-type=\"doi\"]"),
         "journal":root.xpath("//article//journal-title/text()")[0],
         "year":int(root.xpath("//article//year/text()")[0]),
-        "article-title":" ".join(root.xpath("//article-meta//article-title/text()")),
-        #"topic":dataframe.loc[index,"topic"]
+        "article-title":"".join(root.xpath("//article-meta//article-title//text()")),
         "topic":None
     }
+
+    if "topic" in dataframe:
+        metadata["topic"]=dataframe["topic"][index]
 
 
     # metadata={
@@ -59,7 +61,7 @@ def getMeta(root,dataframe,index):
 
 
 
-def parseXMLSection(sourceFileFrame,MaxChunks,MaxDocuments,chunkSize):
+def parseXMLSection(sourceFileFrame,MaxChunks,MaxDocuments):
 
 
     totalchunks=0
@@ -139,10 +141,11 @@ def chunkSection(sec,metadata,chunkIndex):
     
     sectionText=""
     for text in sec.xpath(".//p"):
-        if text.text==None:
-            continue
-        sectionText=sectionText+text.text
-
+        #if text.text==None:
+        #   continue
+        #sectionText=sectionText+text.text
+        sectionText=sectionText.join(text.xpath(".//text()"))
+        
     title=sec.xpath((".//title"))
     titSec=None
     if len(title)!=0:
@@ -278,12 +281,15 @@ def chunkSectionToParagraph(sec,metadata,chunkIndex,minchunkSize):
     for chunkText in sec.xpath(".//p"):
 
 
-        if chunkText.text==None:
+        #if chunkText.text==None:
+        if len(chunkText.xpath(".//text()"))==0:
             indexOfSectionChunk=indexOfSectionChunk+1
             continue
 
         #if paragrpah is too small add it to the next chunk/ paragrph. if there is no other parapgraph IN THE SECTION then put it in it's own cluster 
-        inputText=inputText+chunkText.text
+        #inputText=inputText+chunkText.text
+        inputText=inputText.join(chunkText.xpath(".//text()"))
+
         if len(inputText)<minchunkSize and indexOfSectionChunk+1 < numParagraphs:
             indexOfSectionChunk=indexOfSectionChunk+1
             continue
@@ -298,7 +304,7 @@ def chunkSectionToParagraph(sec,metadata,chunkIndex,minchunkSize):
             "topic":[metadata["topic"]],
             "article-title": [metadata["article-title"]],
             "section_type": [sec.attrib.get('sec-type')],
-            "section_id": [str(sec.attrib.get('id'))],
+            "section_id": [sec.attrib.get('id')],
             "section_title": [titSec],
             "section_path": [None],
             "chunk_text":[inputText],
@@ -436,12 +442,15 @@ def chunkSectionParagraphwModel(sec,metadata,chunkIndex,minchunkSize,chunkingMod
     for chunkText in sec.xpath(".//p"):
 
 
-        if chunkText.text==None:
+        #if chunkText.text==None:
+        if len(chunkText.xpath(".//text()"))==0:
             indexOfSectionChunk=indexOfSectionChunk+1
             continue
 
         #if paragrpah is too small add it to the next chunk/ paragrph. if there is no other parapgraph IN THE SECTION then put it in it's own cluster 
-        inputText=inputText+chunkText.text
+        #inputText=inputText+chunkText.text
+        inputText=inputText.join(chunkText.xpath(".//text()"))
+        
         if len(inputText)<minchunkSize and indexOfSectionChunk+1 < numParagraphs:
             indexOfSectionChunk=indexOfSectionChunk+1
             continue
@@ -458,7 +467,7 @@ def chunkSectionParagraphwModel(sec,metadata,chunkIndex,minchunkSize,chunkingMod
                 "topic":[metadata["topic"]],
                 "article-title": [metadata["article-title"]],
                 "section_type": [sec.attrib.get('sec-type')],
-                "section_id": [str(sec.attrib.get('id'))],
+                "section_id": [sec.attrib.get('id')],
                 "section_title": [titSec],
                 "section_path": [None],
                 "chunk_text":[paragraphText],
@@ -490,8 +499,9 @@ def getBlankDataframe():
 
 if __name__ == '__main__':
 
-    #source=getDataframe("./pmc_chunker/out/manifest_4000.csv",False)
-    source=getDataframe("./pmc_chunker/data/xml/",True)
+    source=getDataframe("./pmc_chunker/out/manifest_4000.csv",False)
+    #source=getDataframe("./pmc_chunker/data/xml/",True)
+    #source=getDataframe("./pmc_chunker/data/xml2/",True)
 
 
     #parseXMLSection(1000,4000,340)
@@ -501,3 +511,5 @@ if __name__ == '__main__':
     chk=chunker.getFixedChunker(700)
     #chk=chunker.getModel("sentence-transformers/all-MiniLM-L6-v2")
     parseXMLSectionParagraphModel(source,100000,4000,700,chk)
+
+
