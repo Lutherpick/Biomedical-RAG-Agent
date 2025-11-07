@@ -226,10 +226,7 @@ def parseXMLSectionParagraph(sourceFileFrame,MaxChunks,MaxDocuments,minchunkSize
         totalchunks=totalchunks+1
 
 
-        figs=chunkFigure(root,None,None,metadata,chunkIndex)
-        dfs.extend(figs)
-        chunkIndex=chunkIndex+len(figs)
-        totalchunks=totalchunks+len(figs)
+
 
 
 
@@ -296,7 +293,11 @@ def parseXMLSectionParagraph(sourceFileFrame,MaxChunks,MaxDocuments,minchunkSize
 
             if chunkLimitDocLimit(MaxChunks,MaxDocuments,len(dfs),totalDocuments):
                 break
-
+            
+        figs=chunkFigure(root,None,None,metadata,chunkIndex)
+        dfs.extend(figs)
+        chunkIndex=chunkIndex+len(figs)
+        totalchunks=totalchunks+len(figs)
         totalDocuments=totalDocuments+1
         
         if chunkLimitDocLimit(MaxChunks,MaxDocuments,totalchunks,totalDocuments):
@@ -538,13 +539,18 @@ def parseXMLSectionParagraphModel(sourceFileFrame,MaxChunks,MaxDocuments,minchun
                 if chunkLimitDocLimit(MaxChunks,MaxDocuments,len(dfs),totalDocuments):
                     break
         
-            figs=chunkFigure(sec,sectionTitle,None,metadata,chunkIndex)
-            dfs.extend(figs)
-            chunkIndex=chunkIndex+len(figs)
-            totalchunks=totalchunks+len(figs)
+            # figs=chunkFigure(sec,sectionTitle,None,metadata,chunkIndex)
+            # dfs.extend(figs)
+            # chunkIndex=chunkIndex+len(figs)
+            # totalchunks=totalchunks+len(figs)
             
             if chunkLimitDocLimit(MaxChunks,MaxDocuments,len(dfs),totalDocuments):
                 break
+            
+        figs=chunkFigure(root,None,None,metadata,chunkIndex)
+        dfs.extend(figs)
+        chunkIndex=chunkIndex+len(figs)
+        totalchunks=totalchunks+len(figs)
 
         totalDocuments=totalDocuments+1
         
@@ -745,6 +751,7 @@ def getBlankDataframe():
 if __name__ == '__main__':
 
     source=getDataframe("./pmc_chunker/out/manifest_4000.csv",False)
+    #source=getDataframe("./pmc_chunker/out/manifest_two.csv",False)
     #source=getDataframe("./pmc_chunker/data/xml/",True)
     #source=getDataframe("./pmc_chunker/data/xml2/",True)
 
@@ -752,10 +759,10 @@ if __name__ == '__main__':
 
     #parseXMLSection(1000,4000,340)
 
-    parseXMLSectionParagraph(source,100000,1000,300)
+    parseXMLSectionParagraph(source,200000,4000,700)
 
-    #chk=chunker.getFixedChunker(700)
-    chk=chunker.getModel("sentence-transformers/all-MiniLM-L6-v2",700)
-    #parseXMLSectionParagraphModel(source,200000,1000,10000,chk)
+    chk=chunker.getFixedChunker(700)
+    #chk=chunker.getModel("sentence-transformers/all-MiniLM-L6-v2",700)
+    #parseXMLSectionParagraphModel(source,200000,4000,10000,chk)
 
 
