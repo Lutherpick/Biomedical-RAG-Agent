@@ -17,6 +17,9 @@ from gensim.models import LsiModel
 from gensim.models import LdaModel
 from gensim import corpora
 
+from bertopic import BERTopic
+from sklearn.datasets import fetch_20newsgroups
+
 def getChunks():
     f=open("./pmc_chunker/out/chunks.json")
     df=pd.read_json(StringIO(f.read()),lines=True,orient="records")
@@ -179,6 +182,51 @@ def methode4(workingSet,numTopicWords,numTopics):
     #return lsa[doc_term_matrix[0]]#lsa.id2word[100]
     return topics
 
+def methode5(workingSet,numTopicWords,numTopics):
+
+
+    normalized=[]
+    for text in workingSet:
+        stop_free = " ".join([i for i in text.lower().split() if i not in stop])
+        punc_free = "".join(ch for ch in stop_free if ch not in exclude)
+        #normalized.append((" ".join(lemma.lemmatize(word) for word in punc_free.split()).split()))
+        normalized.append(" ".join(lemma.lemmatize(word) for word in punc_free.split()))
+        #print(normalized[0])
+
+    topic_model = BERTopic()
+    topics, probs = topic_model.fit_transform(normalized)
+    
+    retTopics=[]
+    for i in range(numTopics):
+        if(i>numTopics):
+            break
+        retTopics.append(topic_model.get_topic(0)[:numTopicWords])
+    return retTopics
+
+#bert supervised labeling
+def methode6(workingSet,numTopicWords,numTopics):
+    #tutorial: https://maartengr.github.io/BERTopic/getting_started/manual/manual.html
+    print("not implemented yet")
+
+    # normalized=[]
+    # for text in workingSet:
+        # stop_free = " ".join([i for i in text.lower().split() if i not in stop])
+        # punc_free = "".join(ch for ch in stop_free if ch not in exclude)
+        # #normalized.append((" ".join(lemma.lemmatize(word) for word in punc_free.split()).split()))
+        # normalized.append(" ".join(lemma.lemmatize(word) for word in punc_free.split()))
+        # #print(normalized[0])
+
+    # topic_model = BERTopic()
+    # topics, probs = topic_model.fit_transform(normalized)
+    
+    # retTopics=[]
+    # for i in range(numTopics):
+        # if(i>numTopics):
+            # break
+        # retTopics.append(topic_model.get_topic(0)[:numTopicWords])
+    # return retTopics
+
+
 
 if __name__ == '__main__':
 
@@ -202,3 +250,6 @@ if __name__ == '__main__':
     print()#"ginsim LSA")
     print(temp4)
 
+    temp5=methode5(workingset,3,2)
+    print()
+    print(temp5)
