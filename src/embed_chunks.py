@@ -4,11 +4,10 @@ from __future__ import annotations
 import argparse
 import json
 from pathlib import Path
-from typing import List, Dict, Any
+from typing import List, Dict, Any, Tuple
 
 import numpy as np
 
-# Optional progress bar. Falls back to no-op if not installed.
 try:
     from tqdm import tqdm
 except Exception:  # pragma: no cover
@@ -44,8 +43,6 @@ def _load_model(name: str, device: str):
             device = "cpu"
     return SentenceTransformer(name, device=device)
 
-
-
 # -----------------------
 # IO
 # -----------------------
@@ -54,7 +51,7 @@ def _read_jsonl_texts(
         text_field: str,
         id_field: str | None,
         limit: int | None,
-) -> tuple[List[str], List[Dict[str, Any]]]:
+) -> Tuple[List[str], List[Dict[str, Any]]]:
     texts: List[str] = []
     meta: List[Dict[str, Any]] = []
     with path.open("r", encoding="utf-8") as f:
@@ -68,14 +65,11 @@ def _read_jsonl_texts(
             if not isinstance(txt, str) or not txt.strip():
                 continue
 
-            # token count here for audit; not used by the model
             obj["token_count_embed"] = count_tokens(txt)
 
-            # build a stable id
             if id_field and id_field in obj:
                 obj_id = str(obj[id_field])
             else:
-                # Try a composite id if available
                 pmcid = str(obj.get("pmcid", "NA"))
                 ver = str(obj.get("version", "v?"))
                 sec = str(obj.get("section_type", "Section"))
@@ -88,8 +82,6 @@ def _read_jsonl_texts(
     return texts, meta
 
 def _write_sidecars(out_path: Path, embeddings: np.ndarray, meta: List[Dict[str, Any]]) -> None:
-    # .npy main array already handled by caller
-    # Write metadata JSONL so rows align with embeddings
     meta_path = out_path.with_suffix(".meta.jsonl")
     with meta_path.open("w", encoding="utf-8") as w:
         for m in meta:
@@ -104,32 +96,61 @@ def _write_sidecars(out_path: Path, embeddings: np.ndarray, meta: List[Dict[str,
                 "token_count_embed": m.get("token_count_embed"),
             }, ensure_ascii=False) + "\n")
 
-    # Simple shape file for quick checks
     shape_path = out_path.with_suffix(".shape.txt")
     with shape_path.open("w", encoding="utf-8") as w:
         w.write(f"{embeddings.shape[0]} x {embeddings.shape[1]}\n")
 
 # -----------------------
+# Path resolver
+# -----------------------
+def resolve_paths(args) -> Tuple[Path, Path]:
+    # If explicit paths given, use them.
+    if args.inp and args.out:
+        return Path(args.inp), Path(args.out)
+
+    # Else require version and dirs.
+    if not args.version:
+        raise SystemExit("Provide --version or both --inp and --out.")
+
+    in_dir = Path(args.in_dir)
+    out_dir = Path(args.out_dir)
+    in_map = {
+        "v1": in_dir / "chunks_v1.jsonl",
+        "v2": in_dir / "chunks_v2.jsonl",
+        "v3": in_dir / "chunks_v3.jsonl",
+    }
+    out_map = {
+        "v1": out_dir / "emb_v1.npy",
+        "v2": out_dir / "emb_v2.npy",
+        "v3": out_dir / "emb_v3.npy",
+    }
+    return in_map[args.version], out_map[args.version]
+
+# -----------------------
 # Main
 # -----------------------
 def parse_args() -> argparse.Namespace:
-    p = argparse.ArgumentParser(description="Embed JSONL chunks to a .npy matrix + .meta.jsonl")
-    p.add_argument("--inp", required=True, help="Input JSONL (e.g., src/pmc_chunker/out/chunks_v1.jsonl)")
-    p.add_argument("--out", required=True, help="Output .npy path (e.g., src/pmc_chunker/out/emb_v1.npy)")
-    p.add_argument("--model", default="sentence-transformers/all-MiniLM-L6-v2",
-                   help="Sentence-Transformers model")
-    p.add_argument("--batch-size", type=int, default=1024, help="Encode batch size")
-    p.add_argument("--normalize", action="store_true", help="L2-normalize embeddings")
-    p.add_argument("--limit", type=int, default=None, help="Optional cap on number of lines")
-    p.add_argument("--text-field", default="chunk_text", help="Field name with text")
-    p.add_argument("--id-field", default=None, help="Optional field for stable IDs")
-    p.add_argument("--device", default="auto", help="cuda | cpu | auto")
+    p = argparse.ArgumentParser(description="Embed JSONL chunks to .npy + sidecars")
+    # New convenience flags
+    p.add_argument("--version", choices=["v1", "v2", "v3"], help="If set, auto-pick input/output filenames")
+    p.add_argument("--in-dir", default="src/pmc_chunker/out", help="Directory containing chunks_*.jsonl")
+    p.add_argument("--out-dir", default="src/pmc_chunker/out", help="Directory to write emb_*.npy")
+    # Backward-compatible explicit paths
+    p.add_argument("--inp", help="Explicit input JSONL")
+    p.add_argument("--out", help="Explicit output .npy")
+    # Model/config
+    p.add_argument("--model", default="sentence-transformers/all-MiniLM-L6-v2")
+    p.add_argument("--batch-size", type=int, default=1024)
+    p.add_argument("--normalize", action="store_true")
+    p.add_argument("--limit", type=int, default=None)
+    p.add_argument("--text-field", default="chunk_text")
+    p.add_argument("--id-field", default=None)
+    p.add_argument("--device", default="auto")
     return p.parse_args()
 
 def main() -> None:
     args = parse_args()
-    inp = Path(args.inp)
-    out = Path(args.out)
+    inp, out = resolve_paths(args)
     out.parent.mkdir(parents=True, exist_ok=True)
 
     texts, meta = _read_jsonl_texts(
@@ -139,23 +160,24 @@ def main() -> None:
         limit=args.limit,
     )
     if not texts:
-        # still create empty outputs for reproducibility
         empty = np.zeros((0, 384), dtype=np.float32)
         np.save(out, empty)
         _write_sidecars(out, empty, [])
         print("[embed] 0 rows ->", out)
         return
 
-    # 3) call with device
     model = _load_model(args.model, args.device)
 
-    # Encode in batches to control memory
     all_vecs: List[np.ndarray] = []
     bs = max(1, int(args.batch_size))
     for i in tqdm(range(0, len(texts), bs), desc="encoding", unit="rows"):
         chunk = texts[i:i + bs]
-        vec = model.encode(chunk, batch_size=min(bs, 64), convert_to_numpy=True, normalize_embeddings=args.normalize)
-        # ensure float32
+        vec = model.encode(
+            chunk,
+            batch_size=min(bs, 64),
+            convert_to_numpy=True,
+            normalize_embeddings=args.normalize,
+        )
         if vec.dtype != np.float32:
             vec = vec.astype(np.float32, copy=False)
         all_vecs.append(vec)
@@ -163,7 +185,6 @@ def main() -> None:
     embeddings = np.vstack(all_vecs)
     np.save(out, embeddings)
     _write_sidecars(out, embeddings, meta)
-
     print(f"[embed] {embeddings.shape[0]} rows, dim={embeddings.shape[1]} -> {out}")
 
 if __name__ == "__main__":
