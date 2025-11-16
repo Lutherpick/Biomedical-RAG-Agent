@@ -1,0 +1,13 @@
+{
+  "by_k": {
+    "5": {
+      "precision": 0.096,
+      "recall": 0.0052
+    },
+    "10": {
+      "precision": 0.096,
+      "recall": 0.0097
+    }
+  },
+  "n_clusters": 50
+}

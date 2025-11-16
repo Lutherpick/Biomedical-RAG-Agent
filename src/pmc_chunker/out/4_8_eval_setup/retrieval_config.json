@@ -1,0 +1,10 @@
+{
+  "collection": "biomed_paragraphs",
+  "embedding_model": "text-embedding-3-small",
+  "embedding_model_version": "v0.2",
+  "index_type": "HNSW",
+  "distance": "cosine",
+  "top_k": 5,
+  "n_queries": 613,
+  "n_clusters": 613
+}

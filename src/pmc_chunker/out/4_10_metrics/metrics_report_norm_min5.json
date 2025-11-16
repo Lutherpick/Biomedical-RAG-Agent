@@ -1,0 +1,2743 @@
+{
+  "min_queries": 5,
+  "retrieval_all": {
+    "k": 5,
+    "n_queries": 613,
+    "macro_precision_at_k": 0.4551386623164764,
+    "macro_recall_at_k": 0.7047308319738989,
+    "per_label": [
+      {
+        "label": "statistical",
+        "n_queries": 18,
+        "precision_at_k": 0.6000000000000001,
+        "recall_at_k": 0.8333333333333334
+      },
+      {
+        "label": "covid19",
+        "n_queries": 12,
+        "precision_at_k": 0.5666666666666667,
+        "recall_at_k": 0.75
+      },
+      {
+        "label": "gene expression",
+        "n_queries": 11,
+        "precision_at_k": 0.49090909090909096,
+        "recall_at_k": 0.8181818181818182
+      },
+      {
+        "label": "culture",
+        "n_queries": 7,
+        "precision_at_k": 0.5142857142857143,
+        "recall_at_k": 0.7142857142857143
+      },
+      {
+        "label": "medical imaging",
+        "n_queries": 7,
+        "precision_at_k": 0.6571428571428571,
+        "recall_at_k": 0.8571428571428571
+      },
+      {
+        "label": "infectious diseases",
+        "n_queries": 6,
+        "precision_at_k": 0.7666666666666666,
+        "recall_at_k": 0.8333333333333334
+      },
+      {
+        "label": "inflammation",
+        "n_queries": 5,
+        "precision_at_k": 0.52,
+        "recall_at_k": 0.8
+      },
+      {
+        "label": "machine learning",
+        "n_queries": 5,
+        "precision_at_k": 0.64,
+        "recall_at_k": 0.8
+      },
+      {
+        "label": "cardiovascular disease",
+        "n_queries": 4,
+        "precision_at_k": 0.25,
+        "recall_at_k": 0.5
+      },
+      {
+        "label": "clinical",
+        "n_queries": 4,
+        "precision_at_k": 0.4,
+        "recall_at_k": 1.0
+      },
+      {
+        "label": "vaccination",
+        "n_queries": 4,
+        "precision_at_k": 0.25,
+        "recall_at_k": 0.25
+      },
+      {
+        "label": "neuroscience",
+        "n_queries": 4,
+        "precision_at_k": 0.4,
+        "recall_at_k": 0.5
+      },
+      {
+        "label": "antimicrobial resistance",
+        "n_queries": 4,
+        "precision_at_k": 0.65,
+        "recall_at_k": 1.0
+      },
+      {
+        "label": "dna damage",
+        "n_queries": 3,
+        "precision_at_k": 0.7999999999999999,
+        "recall_at_k": 1.0
+      },
+      {
+        "label": "analytical",
+        "n_queries": 3,
+        "precision_at_k": 0.6,
+        "recall_at_k": 1.0
+      },
+      {
+        "label": "neurological disorders",
+        "n_queries": 3,
+        "precision_at_k": 0.26666666666666666,
+        "recall_at_k": 0.6666666666666666
+      },
+      {
+        "label": "pharmacotherapy",
+        "n_queries": 3,
+        "precision_at_k": 0.39999999999999997,
+        "recall_at_k": 0.6666666666666666
+      },
+      {
+        "label": "plant genomics",
+        "n_queries": 3,
+        "precision_at_k": 1.0,
+        "recall_at_k": 1.0
+      },
+      {
+        "label": "virology",
+        "n_queries": 3,
+        "precision_at_k": 0.7333333333333334,
+        "recall_at_k": 1.0
+      },
+      {
+        "label": "deep learning",
+        "n_queries": 3,
+        "precision_at_k": 0.13333333333333333,
+        "recall_at_k": 0.3333333333333333
+      },
+      {
+        "label": "health economics",
+        "n_queries": 3,
+        "precision_at_k": 0.0,
+        "recall_at_k": 0.0
+      },
+      {
+        "label": "sars-cov-2",
+        "n_queries": 3,
+        "precision_at_k": 1.0,
+        "recall_at_k": 1.0
+      },
+      {
+        "label": "micrornas",
+        "n_queries": 3,
+        "precision_at_k": 0.6,
+        "recall_at_k": 1.0
+      },
+      {
+        "label": "statistical modeling",
+        "n_queries": 3,
+        "precision_at_k": 0.06666666666666667,
+        "recall_at_k": 0.3333333333333333
+      },
+      {
+        "label": "genome assembly",
+        "n_queries": 3,
+        "precision_at_k": 0.39999999999999997,
+        "recall_at_k": 0.6666666666666666
+      },
+      {
+        "label": "t",
+        "n_queries": 3,
+        "precision_at_k": 0.6,
+        "recall_at_k": 0.6666666666666666
+      },
+      {
+        "label": "dna methylation",
+        "n_queries": 3,
+        "precision_at_k": 0.7333333333333334,
+        "recall_at_k": 1.0
+      },
+      {
+        "label": "lipid metabolism",
+        "n_queries": 3,
+        "precision_at_k": 0.6,
+        "recall_at_k": 1.0
+      },
+      {
+        "label": "mental health",
+        "n_queries": 3,
+        "precision_at_k": 0.20000000000000004,
+        "recall_at_k": 0.6666666666666666
+      },
+      {
+        "label": "models",
+        "n_queries": 3,
+        "precision_at_k": 0.6,
+        "recall_at_k": 0.6666666666666666
+      },
+      {
+        "label": "nanomaterials",
+        "n_queries": 3,
+        "precision_at_k": 0.26666666666666666,
+        "recall_at_k": 0.6666666666666666
+      },
+      {
+        "label": "network",
+        "n_queries": 3,
+        "precision_at_k": 0.4666666666666666,
+        "recall_at_k": 0.6666666666666666
+      },
+      {
+        "label": "caregiving",
+        "n_queries": 2,
+        "precision_at_k": 0.4,
+        "recall_at_k": 0.5
+      },
+      {
+        "label": "genome sequencing",
+        "n_queries": 2,
+        "precision_at_k": 0.5,
+        "recall_at_k": 1.0
+      },
+      {
+        "label": "conflict of",
+        "n_queries": 2,
+        "precision_at_k": 0.5,
+        "recall_at_k": 0.5
+      },
+      {
+        "label": "dietary intake",
+        "n_queries": 2,
+        "precision_at_k": 0.1,
+        "recall_at_k": 0.5
+      },
+      {
+        "label": "epidemiology",
+        "n_queries": 2,
+        "precision_at_k": 0.3,
+        "recall_at_k": 0.5
+      },
+      {
+        "label": "hiv infection",
+        "n_queries": 2,
+        "precision_at_k": 0.4,
+        "recall_at_k": 1.0
+      },
+      {
+        "label": "behavior",
+        "n_queries": 2,
+        "precision_at_k": 0.2,
+        "recall_at_k": 0.5
+      },
+      {
+        "label": "child health",
+        "n_queries": 2,
+        "precision_at_k": 0.2,
+        "recall_at_k": 1.0
+      },
+      {
+        "label": "electrochemical sensors",
+        "n_queries": 2,
+        "precision_at_k": 0.0,
+        "recall_at_k": 0.0
+      },
+      {
+        "label": "healthcare workforce",
+        "n_queries": 2,
+        "precision_at_k": 0.2,
+        "recall_at_k": 0.5
+      },
+      {
+        "label": "immune regulation",
+        "n_queries": 2,
+        "precision_at_k": 0.3,
+        "recall_at_k": 0.5
+      },
+      {
+        "label": "gut microbiota",
+        "n_queries": 2,
+        "precision_at_k": 0.7,
+        "recall_at_k": 1.0
+      },
+      {
+        "label": "health communication",
+        "n_queries": 2,
+        "precision_at_k": 0.3,
+        "recall_at_k": 0.5
+      },
+      {
+        "label": "surgical techniques",
+        "n_queries": 2,
+        "precision_at_k": 0.4,
+        "recall_at_k": 0.5
+      },
+      {
+        "label": "alzheimer disease",
+        "n_queries": 2,
+        "precision_at_k": 0.30000000000000004,
+        "recall_at_k": 1.0
+      },
+      {
+        "label": "clinical management",
+        "n_queries": 2,
+        "precision_at_k": 0.2,
+        "recall_at_k": 0.5
+      },
+      {
+        "label": "drug delivery",
+        "n_queries": 2,
+        "precision_at_k": 0.4,
+        "recall_at_k": 1.0
+      },
+      {
+        "label": "antibodies",
+        "n_queries": 2,
+        "precision_at_k": 0.4,
+        "recall_at_k": 1.0
+      },
+      {
+        "label": "cancer therapeutics",
+        "n_queries": 2,
+        "precision_at_k": 0.7,
+        "recall_at_k": 1.0
+      },
+      {
+        "label": "demographics",
+        "n_queries": 2,
+        "precision_at_k": 0.2,
+        "recall_at_k": 0.5
+      },
+      {
+        "label": "signaling",
+        "n_queries": 2,
+        "precision_at_k": 0.6000000000000001,
+        "recall_at_k": 1.0
+      },
+      {
+        "label": "molecular cloning",
+        "n_queries": 2,
+        "precision_at_k": 0.2,
+        "recall_at_k": 0.5
+      },
+      {
+        "label": "lncrna",
+        "n_queries": 2,
+        "precision_at_k": 0.6,
+        "recall_at_k": 1.0
+      },
+      {
+        "label": "nanoparticle drug",
+        "n_queries": 2,
+        "precision_at_k": 0.7,
+        "recall_at_k": 1.0
+      },
+      {
+        "label": "computational genomics",
+        "n_queries": 2,
+        "precision_at_k": 0.4,
+        "recall_at_k": 1.0
+      },
+      {
+        "label": "materials characterization",
+        "n_queries": 2,
+        "precision_at_k": 0.4,
+        "recall_at_k": 1.0
+      },
+      {
+        "label": "comparative genomics",
+        "n_queries": 2,
+        "precision_at_k": 0.8,
+        "recall_at_k": 1.0
+      },
+      {
+        "label": "obesity",
+        "n_queries": 2,
+        "precision_at_k": 0.7,
+        "recall_at_k": 1.0
+      },
+      {
+        "label": "organic synthesis",
+        "n_queries": 2,
+        "precision_at_k": 0.7,
+        "recall_at_k": 1.0
+      },
+      {
+        "label": "orthopedic surgery",
+        "n_queries": 2,
+        "precision_at_k": 0.7,
+        "recall_at_k": 1.0
+      },
+      {
+        "label": "immune",
+        "n_queries": 2,
+        "precision_at_k": 0.6,
+        "recall_at_k": 1.0
+      },
+      {
+        "label": "apoptosis",
+        "n_queries": 2,
+        "precision_at_k": 0.7,
+        "recall_at_k": 1.0
+      },
+      {
+        "label": "physical activity",
+        "n_queries": 2,
+        "precision_at_k": 0.1,
+        "recall_at_k": 0.5
+      },
+      {
+        "label": "informed consent",
+        "n_queries": 2,
+        "precision_at_k": 0.8,
+        "recall_at_k": 1.0
+      },
+      {
+        "label": "plant polyphenols",
+        "n_queries": 2,
+        "precision_at_k": 1.0,
+        "recall_at_k": 1.0
+      },
+      {
+        "label": "population genetics",
+        "n_queries": 2,
+        "precision_at_k": 0.30000000000000004,
+        "recall_at_k": 1.0
+      },
+      {
+        "label": "research ethics",
+        "n_queries": 2,
+        "precision_at_k": 0.9,
+        "recall_at_k": 1.0
+      },
+      {
+        "label": "research methodology",
+        "n_queries": 2,
+        "precision_at_k": 0.8,
+        "recall_at_k": 1.0
+      },
+      {
+        "label": "risk prediction",
+        "n_queries": 2,
+        "precision_at_k": 0.5,
+        "recall_at_k": 1.0
+      },
+      {
+        "label": "roc",
+        "n_queries": 2,
+        "precision_at_k": 0.4,
+        "recall_at_k": 1.0
+      },
+      {
+        "label": "covid-19",
+        "n_queries": 2,
+        "precision_at_k": 0.9,
+        "recall_at_k": 1.0
+      },
+      {
+        "label": "tissue engineering",
+        "n_queries": 2,
+        "precision_at_k": 0.6,
+        "recall_at_k": 1.0
+      },
+      {
+        "label": "tumor immunology",
+        "n_queries": 2,
+        "precision_at_k": 0.4,
+        "recall_at_k": 1.0
+      },
+      {
+        "label": "diabetes mellitus",
+        "n_queries": 2,
+        "precision_at_k": 0.9,
+        "recall_at_k": 1.0
+      },
+      {
+        "label": "microbiome",
+        "n_queries": 2,
+        "precision_at_k": 0.4,
+        "recall_at_k": 0.5
+      },
+      {
+        "label": "visual attention",
+        "n_queries": 2,
+        "precision_at_k": 0.1,
+        "recall_at_k": 0.5
+      },
+      {
+        "label": "genetic variants",
+        "n_queries": 2,
+        "precision_at_k": 0.5,
+        "recall_at_k": 1.0
+      },
+      {
+        "label": "cancer",
+        "n_queries": 2,
+        "precision_at_k": 0.8,
+        "recall_at_k": 1.0
+      },
+      {
+        "label": "cancer chemotherapy",
+        "n_queries": 2,
+        "precision_at_k": 0.3,
+        "recall_at_k": 0.5
+      },
+      {
+        "label": "cancer genomics",
+        "n_queries": 2,
+        "precision_at_k": 0.5,
+        "recall_at_k": 1.0
+      },
+      {
+        "label": "cancer immunotherapy",
+        "n_queries": 2,
+        "precision_at_k": 0.8,
+        "recall_at_k": 1.0
+      },
+      {
+        "label": "spinal disorders",
+        "n_queries": 1,
+        "precision_at_k": 1.0,
+        "recall_at_k": 1.0
+      },
+      {
+        "label": "stent endothelium",
+        "n_queries": 1,
+        "precision_at_k": 0.0,
+        "recall_at_k": 0.0
+      },
+      {
+        "label": "stress epigenetics",
+        "n_queries": 1,
+        "precision_at_k": 1.0,
+        "recall_at_k": 1.0
+      },
+      {
+        "label": "structural",
+        "n_queries": 1,
+        "precision_at_k": 0.0,
+        "recall_at_k": 0.0
+      },
+      {
+        "label": "aquatic ecology",
+        "n_queries": 1,
+        "precision_at_k": 0.4,
+        "recall_at_k": 1.0
+      },
+      {
+        "label": "structure",
+        "n_queries": 1,
+        "precision_at_k": 0.6,
+        "recall_at_k": 1.0
+      },
+      {
+        "label": "supplementary materials",
+        "n_queries": 1,
+        "precision_at_k": 1.0,
+        "recall_at_k": 1.0
+      },
+      {
+        "label": "surgical outcomes",
+        "n_queries": 1,
+        "precision_at_k": 0.6,
+        "recall_at_k": 1.0
+      },
+      {
+        "label": "surgical procedures",
+        "n_queries": 1,
+        "precision_at_k": 1.0,
+        "recall_at_k": 1.0
+      },
+      {
+        "label": "antimicrobial nanoparticles",
+        "n_queries": 1,
+        "precision_at_k": 1.0,
+        "recall_at_k": 1.0
+      },
+      {
+        "label": "cancer surgery",
+        "n_queries": 1,
+        "precision_at_k": 1.0,
+        "recall_at_k": 1.0
+      },
+      {
+        "label": "cancer survival",
+        "n_queries": 1,
+        "precision_at_k": 1.0,
+        "recall_at_k": 1.0
+      },
+      {
+        "label": "cancer therapies",
+        "n_queries": 1,
+        "precision_at_k": 0.0,
+        "recall_at_k": 0.0
+      },
+      {
+        "label": "cancer therapy",
+        "n_queries": 1,
+        "precision_at_k": 0.6,
+        "recall_at_k": 1.0
+      },
+      {
+        "label": "cancer transcriptomics",
+        "n_queries": 1,
+        "precision_at_k": 0.0,
+        "recall_at_k": 0.0
+      },
+      {
+        "label": "cancer treatment",
+        "n_queries": 1,
+        "precision_at_k": 0.0,
+        "recall_at_k": 0.0
+      },
+      {
+        "label": "carbon cycling",
+        "n_queries": 1,
+        "precision_at_k": 0.6,
+        "recall_at_k": 1.0
+      },
+      {
+        "label": "cardiac arrest",
+        "n_queries": 1,
+        "precision_at_k": 0.2,
+        "recall_at_k": 1.0
+      },
+      {
+        "label": "cardiac hemodynamics",
+        "n_queries": 1,
+        "precision_at_k": 0.8,
+        "recall_at_k": 1.0
+      },
+      {
+        "label": "cardiology",
+        "n_queries": 1,
+        "precision_at_k": 0.6,
+        "recall_at_k": 1.0
+      },
+      {
+        "label": "cardiopulmonary monitoring",
+        "n_queries": 1,
+        "precision_at_k": 0.4,
+        "recall_at_k": 1.0
+      },
+      {
+        "label": "central nervous",
+        "n_queries": 1,
+        "precision_at_k": 0.6,
+        "recall_at_k": 1.0
+      },
+      {
+        "label": "cerebral autoregulation",
+        "n_queries": 1,
+        "precision_at_k": 0.2,
+        "recall_at_k": 1.0
+      },
+      {
+        "label": "cerebral ischemia",
+        "n_queries": 1,
+        "precision_at_k": 0.6,
+        "recall_at_k": 1.0
+      },
+      {
+        "label": "cervical neoplasia",
+        "n_queries": 1,
+        "precision_at_k": 0.0,
+        "recall_at_k": 0.0
+      },
+      {
+        "label": "chemical synthesis",
+        "n_queries": 1,
+        "precision_at_k": 0.0,
+        "recall_at_k": 0.0
+      },
+      {
+        "label": "cheminformatics",
+        "n_queries": 1,
+        "precision_at_k": 1.0,
+        "recall_at_k": 1.0
+      },
+      {
+        "label": "child psychopathology",
+        "n_queries": 1,
+        "precision_at_k": 0.8,
+        "recall_at_k": 1.0
+      },
+      {
+        "label": "child psychosocial",
+        "n_queries": 1,
+        "precision_at_k": 0.0,
+        "recall_at_k": 0.0
+      },
+      {
+        "label": "cirrhosis",
+        "n_queries": 1,
+        "precision_at_k": 0.4,
+        "recall_at_k": 1.0
+      },
+      {
+        "label": "climate change",
+        "n_queries": 1,
+        "precision_at_k": 1.0,
+        "recall_at_k": 1.0
+      },
+      {
+        "label": "clinical biomarkers",
+        "n_queries": 1,
+        "precision_at_k": 0.4,
+        "recall_at_k": 1.0
+      },
+      {
+        "label": "clinical characteristics",
+        "n_queries": 1,
+        "precision_at_k": 0.0,
+        "recall_at_k": 0.0
+      },
+      {
+        "label": "clinical criteria",
+        "n_queries": 1,
+        "precision_at_k": 0.0,
+        "recall_at_k": 0.0
+      },
+      {
+        "label": "clinical design",
+        "n_queries": 1,
+        "precision_at_k": 0.0,
+        "recall_at_k": 0.0
+      },
+      {
+        "label": "clinical education",
+        "n_queries": 1,
+        "precision_at_k": 0.2,
+        "recall_at_k": 1.0
+      },
+      {
+        "label": "clinical research",
+        "n_queries": 1,
+        "precision_at_k": 0.0,
+        "recall_at_k": 0.0
+      },
+      {
+        "label": "clinical statistics",
+        "n_queries": 1,
+        "precision_at_k": 0.4,
+        "recall_at_k": 1.0
+      },
+      {
+        "label": "cognitive neuroscience",
+        "n_queries": 1,
+        "precision_at_k": 0.4,
+        "recall_at_k": 1.0
+      },
+      {
+        "label": "cognitive processes",
+        "n_queries": 1,
+        "precision_at_k": 0.8,
+        "recall_at_k": 1.0
+      },
+      {
+        "label": "cohort",
+        "n_queries": 1,
+        "precision_at_k": 0.0,
+        "recall_at_k": 0.0
+      },
+      {
+        "label": "cohorts",
+        "n_queries": 1,
+        "precision_at_k": 0.0,
+        "recall_at_k": 0.0
+      },
+      {
+        "label": "commercial reagents",
+        "n_queries": 1,
+        "precision_at_k": 0.0,
+        "recall_at_k": 0.0
+      },
+      {
+        "label": "computational",
+        "n_queries": 1,
+        "precision_at_k": 0.4,
+        "recall_at_k": 1.0
+      },
+      {
+        "label": "concrete mixtures",
+        "n_queries": 1,
+        "precision_at_k": 1.0,
+        "recall_at_k": 1.0
+      },
+      {
+        "label": "construction materials",
+        "n_queries": 1,
+        "precision_at_k": 1.0,
+        "recall_at_k": 1.0
+      },
+      {
+        "label": "correlation",
+        "n_queries": 1,
+        "precision_at_k": 0.8,
+        "recall_at_k": 1.0
+      },
+      {
+        "label": "cortical networks",
+        "n_queries": 1,
+        "precision_at_k": 0.8,
+        "recall_at_k": 1.0
+      },
+      {
+        "label": "cost effectiveness",
+        "n_queries": 1,
+        "precision_at_k": 0.2,
+        "recall_at_k": 1.0
+      },
+      {
+        "label": "structural mri",
+        "n_queries": 1,
+        "precision_at_k": 0.4,
+        "recall_at_k": 1.0
+      },
+      {
+        "label": "covid19 lockdown",
+        "n_queries": 1,
+        "precision_at_k": 0.0,
+        "recall_at_k": 0.0
+      },
+      {
+        "label": "covid19 pandemic",
+        "n_queries": 1,
+        "precision_at_k": 0.6,
+        "recall_at_k": 1.0
+      },
+      {
+        "label": "covid19 vaccination",
+        "n_queries": 1,
+        "precision_at_k": 1.0,
+        "recall_at_k": 1.0
+      },
+      {
+        "label": "crop physiology",
+        "n_queries": 1,
+        "precision_at_k": 0.0,
+        "recall_at_k": 0.0
+      },
+      {
+        "label": "crop yield",
+        "n_queries": 1,
+        "precision_at_k": 0.8,
+        "recall_at_k": 1.0
+      },
+      {
+        "label": "csf serum",
+        "n_queries": 1,
+        "precision_at_k": 0.6,
+        "recall_at_k": 1.0
+      },
+      {
+        "label": "cytosponge",
+        "n_queries": 1,
+        "precision_at_k": 1.0,
+        "recall_at_k": 1.0
+      },
+      {
+        "label": "decision making",
+        "n_queries": 1,
+        "precision_at_k": 1.0,
+        "recall_at_k": 1.0
+      },
+      {
+        "label": "dental materials",
+        "n_queries": 1,
+        "precision_at_k": 0.0,
+        "recall_at_k": 0.0
+      },
+      {
+        "label": "diabetes management",
+        "n_queries": 1,
+        "precision_at_k": 1.0,
+        "recall_at_k": 1.0
+      },
+      {
+        "label": "diabetic kidney",
+        "n_queries": 1,
+        "precision_at_k": 0.6,
+        "recall_at_k": 1.0
+      },
+      {
+        "label": "diabetic nephropathy",
+        "n_queries": 1,
+        "precision_at_k": 0.0,
+        "recall_at_k": 0.0
+      },
+      {
+        "label": "differentiation",
+        "n_queries": 1,
+        "precision_at_k": 0.0,
+        "recall_at_k": 0.0
+      },
+      {
+        "label": "digital health",
+        "n_queries": 1,
+        "precision_at_k": 0.0,
+        "recall_at_k": 0.0
+      },
+      {
+        "label": "disaster management",
+        "n_queries": 1,
+        "precision_at_k": 1.0,
+        "recall_at_k": 1.0
+      },
+      {
+        "label": "dna detection",
+        "n_queries": 1,
+        "precision_at_k": 0.0,
+        "recall_at_k": 0.0
+      },
+      {
+        "label": "dna extraction",
+        "n_queries": 1,
+        "precision_at_k": 0.4,
+        "recall_at_k": 1.0
+      },
+      {
+        "label": "dna nanotechnology",
+        "n_queries": 1,
+        "precision_at_k": 0.4,
+        "recall_at_k": 1.0
+      },
+      {
+        "label": "dna repair",
+        "n_queries": 1,
+        "precision_at_k": 0.0,
+        "recall_at_k": 0.0
+      },
+      {
+        "label": "drug adverse",
+        "n_queries": 1,
+        "precision_at_k": 0.0,
+        "recall_at_k": 0.0
+      },
+      {
+        "label": "drug dosing",
+        "n_queries": 1,
+        "precision_at_k": 1.0,
+        "recall_at_k": 1.0
+      },
+      {
+        "label": "drug effects",
+        "n_queries": 1,
+        "precision_at_k": 0.0,
+        "recall_at_k": 0.0
+      },
+      {
+        "label": "drug mechanisms",
+        "n_queries": 1,
+        "precision_at_k": 0.0,
+        "recall_at_k": 0.0
+      },
+      {
+        "label": "drug nanocarriers",
+        "n_queries": 1,
+        "precision_at_k": 0.0,
+        "recall_at_k": 0.0
+      },
+      {
+        "label": "drug resistance",
+        "n_queries": 1,
+        "precision_at_k": 0.4,
+        "recall_at_k": 1.0
+      },
+      {
+        "label": "ecology",
+        "n_queries": 1,
+        "precision_at_k": 0.6,
+        "recall_at_k": 1.0
+      },
+      {
+        "label": "editing",
+        "n_queries": 1,
+        "precision_at_k": 0.6,
+        "recall_at_k": 1.0
+      },
+      {
+        "label": "education interventions",
+        "n_queries": 1,
+        "precision_at_k": 0.2,
+        "recall_at_k": 1.0
+      },
+      {
+        "label": "electroencephalography",
+        "n_queries": 1,
+        "precision_at_k": 0.0,
+        "recall_at_k": 0.0
+      },
+      {
+        "label": "electrophysiology",
+        "n_queries": 1,
+        "precision_at_k": 0.4,
+        "recall_at_k": 1.0
+      },
+      {
+        "label": "elisa",
+        "n_queries": 1,
+        "precision_at_k": 0.6,
+        "recall_at_k": 1.0
+      },
+      {
+        "label": "endotracheal intubation",
+        "n_queries": 1,
+        "precision_at_k": 0.0,
+        "recall_at_k": 0.0
+      },
+      {
+        "label": "energy interaction",
+        "n_queries": 1,
+        "precision_at_k": 1.0,
+        "recall_at_k": 1.0
+      },
+      {
+        "label": "engineering",
+        "n_queries": 1,
+        "precision_at_k": 0.0,
+        "recall_at_k": 0.0
+      },
+      {
+        "label": "environmental exposure",
+        "n_queries": 1,
+        "precision_at_k": 0.6,
+        "recall_at_k": 1.0
+      },
+      {
+        "label": "epidemic modeling",
+        "n_queries": 1,
+        "precision_at_k": 1.0,
+        "recall_at_k": 1.0
+      },
+      {
+        "label": "epidemiological modeling",
+        "n_queries": 1,
+        "precision_at_k": 0.0,
+        "recall_at_k": 0.0
+      },
+      {
+        "label": "epigenetic addiction",
+        "n_queries": 1,
+        "precision_at_k": 1.0,
+        "recall_at_k": 1.0
+      },
+      {
+        "label": "ethics",
+        "n_queries": 1,
+        "precision_at_k": 1.0,
+        "recall_at_k": 1.0
+      },
+      {
+        "label": "exosomal rna",
+        "n_queries": 1,
+        "precision_at_k": 1.0,
+        "recall_at_k": 1.0
+      },
+      {
+        "label": "exosomes",
+        "n_queries": 1,
+        "precision_at_k": 0.0,
+        "recall_at_k": 0.0
+      },
+      {
+        "label": "experiments",
+        "n_queries": 1,
+        "precision_at_k": 0.0,
+        "recall_at_k": 0.0
+      },
+      {
+        "label": "flow cytometry",
+        "n_queries": 1,
+        "precision_at_k": 0.8,
+        "recall_at_k": 1.0
+      },
+      {
+        "label": "fluid dynamics",
+        "n_queries": 1,
+        "precision_at_k": 0.0,
+        "recall_at_k": 0.0
+      },
+      {
+        "label": "fluorescence images",
+        "n_queries": 1,
+        "precision_at_k": 0.8,
+        "recall_at_k": 1.0
+      },
+      {
+        "label": "fluorescent probes",
+        "n_queries": 1,
+        "precision_at_k": 0.6,
+        "recall_at_k": 1.0
+      },
+      {
+        "label": "food consumption",
+        "n_queries": 1,
+        "precision_at_k": 1.0,
+        "recall_at_k": 1.0
+      },
+      {
+        "label": "fungal pathogens",
+        "n_queries": 1,
+        "precision_at_k": 0.0,
+        "recall_at_k": 0.0
+      },
+      {
+        "label": "gastrointestinal disorders",
+        "n_queries": 1,
+        "precision_at_k": 0.0,
+        "recall_at_k": 0.0
+      },
+      {
+        "label": "genetic association",
+        "n_queries": 1,
+        "precision_at_k": 0.2,
+        "recall_at_k": 1.0
+      },
+      {
+        "label": "genetic disorders",
+        "n_queries": 1,
+        "precision_at_k": 1.0,
+        "recall_at_k": 1.0
+      },
+      {
+        "label": "genetic polymorphisms",
+        "n_queries": 1,
+        "precision_at_k": 0.0,
+        "recall_at_k": 0.0
+      },
+      {
+        "label": "genetic testing",
+        "n_queries": 1,
+        "precision_at_k": 0.2,
+        "recall_at_k": 1.0
+      },
+      {
+        "label": "genetics",
+        "n_queries": 1,
+        "precision_at_k": 0.4,
+        "recall_at_k": 1.0
+      },
+      {
+        "label": "genome editing",
+        "n_queries": 1,
+        "precision_at_k": 0.6,
+        "recall_at_k": 1.0
+      },
+      {
+        "label": "genome wide",
+        "n_queries": 1,
+        "precision_at_k": 0.0,
+        "recall_at_k": 0.0
+      },
+      {
+        "label": "genomewide association",
+        "n_queries": 1,
+        "precision_at_k": 0.6,
+        "recall_at_k": 1.0
+      },
+      {
+        "label": "genomic variants",
+        "n_queries": 1,
+        "precision_at_k": 0.4,
+        "recall_at_k": 1.0
+      },
+      {
+        "label": "geospatial",
+        "n_queries": 1,
+        "precision_at_k": 0.0,
+        "recall_at_k": 0.0
+      },
+      {
+        "label": "glaucoma",
+        "n_queries": 1,
+        "precision_at_k": 0.8,
+        "recall_at_k": 1.0
+      },
+      {
+        "label": "glioma",
+        "n_queries": 1,
+        "precision_at_k": 1.0,
+        "recall_at_k": 1.0
+      },
+      {
+        "label": "global health",
+        "n_queries": 1,
+        "precision_at_k": 0.6,
+        "recall_at_k": 1.0
+      },
+      {
+        "label": "glucose monitoring",
+        "n_queries": 1,
+        "precision_at_k": 0.6,
+        "recall_at_k": 1.0
+      },
+      {
+        "label": "graphpad prism",
+        "n_queries": 1,
+        "precision_at_k": 0.0,
+        "recall_at_k": 0.0
+      },
+      {
+        "label": "green finance",
+        "n_queries": 1,
+        "precision_at_k": 1.0,
+        "recall_at_k": 1.0
+      },
+      {
+        "label": "health interventions",
+        "n_queries": 1,
+        "precision_at_k": 0.0,
+        "recall_at_k": 0.0
+      },
+      {
+        "label": "health program",
+        "n_queries": 1,
+        "precision_at_k": 0.0,
+        "recall_at_k": 0.0
+      },
+      {
+        "label": "healthcare access",
+        "n_queries": 1,
+        "precision_at_k": 0.2,
+        "recall_at_k": 1.0
+      },
+      {
+        "label": "healthcare governance",
+        "n_queries": 1,
+        "precision_at_k": 0.6,
+        "recall_at_k": 1.0
+      },
+      {
+        "label": "healthcare implementation",
+        "n_queries": 1,
+        "precision_at_k": 0.0,
+        "recall_at_k": 0.0
+      },
+      {
+        "label": "healthcare leadership",
+        "n_queries": 1,
+        "precision_at_k": 0.6,
+        "recall_at_k": 1.0
+      },
+      {
+        "label": "heart failure",
+        "n_queries": 1,
+        "precision_at_k": 0.0,
+        "recall_at_k": 0.0
+      },
+      {
+        "label": "hematology",
+        "n_queries": 1,
+        "precision_at_k": 0.0,
+        "recall_at_k": 0.0
+      },
+      {
+        "label": "hemodynamic monitoring",
+        "n_queries": 1,
+        "precision_at_k": 0.0,
+        "recall_at_k": 0.0
+      },
+      {
+        "label": "hemodynamics",
+        "n_queries": 1,
+        "precision_at_k": 0.0,
+        "recall_at_k": 0.0
+      },
+      {
+        "label": "hepatocellular carcinoma",
+        "n_queries": 1,
+        "precision_at_k": 1.0,
+        "recall_at_k": 1.0
+      },
+      {
+        "label": "histology",
+        "n_queries": 1,
+        "precision_at_k": 0.0,
+        "recall_at_k": 0.0
+      },
+      {
+        "label": "histomorphometry",
+        "n_queries": 1,
+        "precision_at_k": 0.0,
+        "recall_at_k": 0.0
+      },
+      {
+        "label": "histopathology",
+        "n_queries": 1,
+        "precision_at_k": 0.0,
+        "recall_at_k": 0.0
+      },
+      {
+        "label": "hormone signaling",
+        "n_queries": 1,
+        "precision_at_k": 0.0,
+        "recall_at_k": 0.0
+      },
+      {
+        "label": "hypoxia signaling",
+        "n_queries": 1,
+        "precision_at_k": 1.0,
+        "recall_at_k": 1.0
+      },
+      {
+        "label": "icd11",
+        "n_queries": 1,
+        "precision_at_k": 0.0,
+        "recall_at_k": 0.0
+      },
+      {
+        "label": "immune responses",
+        "n_queries": 1,
+        "precision_at_k": 0.6,
+        "recall_at_k": 1.0
+      },
+      {
+        "label": "immunoassays",
+        "n_queries": 1,
+        "precision_at_k": 0.0,
+        "recall_at_k": 0.0
+      },
+      {
+        "label": "immunofluorescence",
+        "n_queries": 1,
+        "precision_at_k": 0.6,
+        "recall_at_k": 1.0
+      },
+      {
+        "label": "immunostaining",
+        "n_queries": 1,
+        "precision_at_k": 0.0,
+        "recall_at_k": 0.0
+      },
+      {
+        "label": "immunotherapy",
+        "n_queries": 1,
+        "precision_at_k": 0.8,
+        "recall_at_k": 1.0
+      },
+      {
+        "label": "immunotherapy vaccines",
+        "n_queries": 1,
+        "precision_at_k": 1.0,
+        "recall_at_k": 1.0
+      },
+      {
+        "label": "implants",
+        "n_queries": 1,
+        "precision_at_k": 0.4,
+        "recall_at_k": 1.0
+      },
+      {
+        "label": "infection models",
+        "n_queries": 1,
+        "precision_at_k": 0.0,
+        "recall_at_k": 0.0
+      },
+      {
+        "label": "artificial intelligence",
+        "n_queries": 1,
+        "precision_at_k": 0.4,
+        "recall_at_k": 1.0
+      },
+      {
+        "label": "autoimmune diseases",
+        "n_queries": 1,
+        "precision_at_k": 1.0,
+        "recall_at_k": 1.0
+      },
+      {
+        "label": "autonomic nervous",
+        "n_queries": 1,
+        "precision_at_k": 0.0,
+        "recall_at_k": 0.0
+      },
+      {
+        "label": "ire1 xbp1",
+        "n_queries": 1,
+        "precision_at_k": 0.4,
+        "recall_at_k": 1.0
+      },
+      {
+        "label": "ischemia reperfusion",
+        "n_queries": 1,
+        "precision_at_k": 0.8,
+        "recall_at_k": 1.0
+      },
+      {
+        "label": "kidney disease",
+        "n_queries": 1,
+        "precision_at_k": 0.0,
+        "recall_at_k": 0.0
+      },
+      {
+        "label": "laboratory",
+        "n_queries": 1,
+        "precision_at_k": 0.2,
+        "recall_at_k": 1.0
+      },
+      {
+        "label": "laboratory assays",
+        "n_queries": 1,
+        "precision_at_k": 0.4,
+        "recall_at_k": 1.0
+      },
+      {
+        "label": "leukemia",
+        "n_queries": 1,
+        "precision_at_k": 0.4,
+        "recall_at_k": 1.0
+      },
+      {
+        "label": "ligand binding",
+        "n_queries": 1,
+        "precision_at_k": 0.0,
+        "recall_at_k": 0.0
+      },
+      {
+        "label": "availability",
+        "n_queries": 1,
+        "precision_at_k": 1.0,
+        "recall_at_k": 1.0
+      },
+      {
+        "label": "lipidomics",
+        "n_queries": 1,
+        "precision_at_k": 0.6,
+        "recall_at_k": 1.0
+      },
+      {
+        "label": "livestock production",
+        "n_queries": 1,
+        "precision_at_k": 0.8,
+        "recall_at_k": 1.0
+      },
+      {
+        "label": "bacterial cultures",
+        "n_queries": 1,
+        "precision_at_k": 0.8,
+        "recall_at_k": 1.0
+      },
+      {
+        "label": "locomotor function",
+        "n_queries": 1,
+        "precision_at_k": 1.0,
+        "recall_at_k": 1.0
+      },
+      {
+        "label": "lung inflammation",
+        "n_queries": 1,
+        "precision_at_k": 0.4,
+        "recall_at_k": 1.0
+      },
+      {
+        "label": "bacterial genomics",
+        "n_queries": 1,
+        "precision_at_k": 0.0,
+        "recall_at_k": 0.0
+      },
+      {
+        "label": "mass spectrometry",
+        "n_queries": 1,
+        "precision_at_k": 0.8,
+        "recall_at_k": 1.0
+      },
+      {
+        "label": "bacterial pathogenesis",
+        "n_queries": 1,
+        "precision_at_k": 0.6,
+        "recall_at_k": 1.0
+      },
+      {
+        "label": "materials testing",
+        "n_queries": 1,
+        "precision_at_k": 1.0,
+        "recall_at_k": 1.0
+      },
+      {
+        "label": "maternal health",
+        "n_queries": 1,
+        "precision_at_k": 0.0,
+        "recall_at_k": 0.0
+      },
+      {
+        "label": "measurement",
+        "n_queries": 1,
+        "precision_at_k": 0.0,
+        "recall_at_k": 0.0
+      },
+      {
+        "label": "measurements",
+        "n_queries": 1,
+        "precision_at_k": 0.0,
+        "recall_at_k": 0.0
+      },
+      {
+        "label": "mechanics",
+        "n_queries": 1,
+        "precision_at_k": 0.0,
+        "recall_at_k": 0.0
+      },
+      {
+        "label": "bibliometrics",
+        "n_queries": 1,
+        "precision_at_k": 1.0,
+        "recall_at_k": 1.0
+      },
+      {
+        "label": "membrane",
+        "n_queries": 1,
+        "precision_at_k": 0.4,
+        "recall_at_k": 1.0
+      },
+      {
+        "label": "memory circuits",
+        "n_queries": 1,
+        "precision_at_k": 0.2,
+        "recall_at_k": 1.0
+      },
+      {
+        "label": "secondary metabolites",
+        "n_queries": 1,
+        "precision_at_k": 0.0,
+        "recall_at_k": 0.0
+      },
+      {
+        "label": "mesenchymal stem",
+        "n_queries": 1,
+        "precision_at_k": 1.0,
+        "recall_at_k": 1.0
+      },
+      {
+        "label": "metabolic pathways",
+        "n_queries": 1,
+        "precision_at_k": 0.2,
+        "recall_at_k": 1.0
+      },
+      {
+        "label": "metabolic syndrome",
+        "n_queries": 1,
+        "precision_at_k": 0.4,
+        "recall_at_k": 1.0
+      },
+      {
+        "label": "metabolism",
+        "n_queries": 1,
+        "precision_at_k": 0.2,
+        "recall_at_k": 1.0
+      },
+      {
+        "label": "metabolomics",
+        "n_queries": 1,
+        "precision_at_k": 0.2,
+        "recall_at_k": 1.0
+      },
+      {
+        "label": "metamaterials",
+        "n_queries": 1,
+        "precision_at_k": 0.0,
+        "recall_at_k": 0.0
+      },
+      {
+        "label": "methodology",
+        "n_queries": 1,
+        "precision_at_k": 0.0,
+        "recall_at_k": 0.0
+      },
+      {
+        "label": "methods",
+        "n_queries": 1,
+        "precision_at_k": 0.0,
+        "recall_at_k": 0.0
+      },
+      {
+        "label": "microbial",
+        "n_queries": 1,
+        "precision_at_k": 0.4,
+        "recall_at_k": 1.0
+      },
+      {
+        "label": "microbial communities",
+        "n_queries": 1,
+        "precision_at_k": 1.0,
+        "recall_at_k": 1.0
+      },
+      {
+        "label": "microbial cultivation",
+        "n_queries": 1,
+        "precision_at_k": 0.8,
+        "recall_at_k": 1.0
+      },
+      {
+        "label": "microbial diagnostics",
+        "n_queries": 1,
+        "precision_at_k": 0.6,
+        "recall_at_k": 1.0
+      },
+      {
+        "label": "microbial metabolism",
+        "n_queries": 1,
+        "precision_at_k": 0.0,
+        "recall_at_k": 0.0
+      },
+      {
+        "label": "cancer signaling",
+        "n_queries": 1,
+        "precision_at_k": 0.4,
+        "recall_at_k": 1.0
+      },
+      {
+        "label": "microbiome diversity",
+        "n_queries": 1,
+        "precision_at_k": 0.8,
+        "recall_at_k": 1.0
+      },
+      {
+        "label": "microglia",
+        "n_queries": 1,
+        "precision_at_k": 1.0,
+        "recall_at_k": 1.0
+      },
+      {
+        "label": "microglial inflammation",
+        "n_queries": 1,
+        "precision_at_k": 0.4,
+        "recall_at_k": 1.0
+      },
+      {
+        "label": "microrna",
+        "n_queries": 1,
+        "precision_at_k": 1.0,
+        "recall_at_k": 1.0
+      },
+      {
+        "label": "telemedicine",
+        "n_queries": 1,
+        "precision_at_k": 0.0,
+        "recall_at_k": 0.0
+      },
+      {
+        "label": "microscopy",
+        "n_queries": 1,
+        "precision_at_k": 0.2,
+        "recall_at_k": 1.0
+      },
+      {
+        "label": "microscopy imaging",
+        "n_queries": 1,
+        "precision_at_k": 0.8,
+        "recall_at_k": 1.0
+      },
+      {
+        "label": "missing",
+        "n_queries": 1,
+        "precision_at_k": 0.4,
+        "recall_at_k": 1.0
+      },
+      {
+        "label": "mitochondrial function",
+        "n_queries": 1,
+        "precision_at_k": 0.8,
+        "recall_at_k": 1.0
+      },
+      {
+        "label": "survey methodology",
+        "n_queries": 1,
+        "precision_at_k": 0.4,
+        "recall_at_k": 1.0
+      },
+      {
+        "label": "blood biomarkers",
+        "n_queries": 1,
+        "precision_at_k": 0.0,
+        "recall_at_k": 0.0
+      },
+      {
+        "label": "mortality outcomes",
+        "n_queries": 1,
+        "precision_at_k": 0.6,
+        "recall_at_k": 1.0
+      },
+      {
+        "label": "motor function",
+        "n_queries": 1,
+        "precision_at_k": 0.8,
+        "recall_at_k": 1.0
+      },
+      {
+        "label": "motor performance",
+        "n_queries": 1,
+        "precision_at_k": 1.0,
+        "recall_at_k": 1.0
+      },
+      {
+        "label": "mrna",
+        "n_queries": 1,
+        "precision_at_k": 1.0,
+        "recall_at_k": 1.0
+      },
+      {
+        "label": "muscle mri",
+        "n_queries": 1,
+        "precision_at_k": 1.0,
+        "recall_at_k": 1.0
+      },
+      {
+        "label": "musculoskeletal assessment",
+        "n_queries": 1,
+        "precision_at_k": 0.4,
+        "recall_at_k": 1.0
+      },
+      {
+        "label": "myeloid leukemia",
+        "n_queries": 1,
+        "precision_at_k": 0.0,
+        "recall_at_k": 0.0
+      },
+      {
+        "label": "water treatment",
+        "n_queries": 1,
+        "precision_at_k": 1.0,
+        "recall_at_k": 1.0
+      },
+      {
+        "label": "nanomedicine",
+        "n_queries": 1,
+        "precision_at_k": 0.2,
+        "recall_at_k": 1.0
+      },
+      {
+        "label": "abbreviations",
+        "n_queries": 1,
+        "precision_at_k": 1.0,
+        "recall_at_k": 1.0
+      },
+      {
+        "label": "nanoparticles",
+        "n_queries": 1,
+        "precision_at_k": 0.8,
+        "recall_at_k": 1.0
+      },
+      {
+        "label": "neoplasms",
+        "n_queries": 1,
+        "precision_at_k": 0.2,
+        "recall_at_k": 1.0
+      },
+      {
+        "label": "administrative statements",
+        "n_queries": 1,
+        "precision_at_k": 0.0,
+        "recall_at_k": 0.0
+      },
+      {
+        "label": "network security",
+        "n_queries": 1,
+        "precision_at_k": 0.4,
+        "recall_at_k": 1.0
+      },
+      {
+        "label": "neural stem",
+        "n_queries": 1,
+        "precision_at_k": 0.8,
+        "recall_at_k": 1.0
+      },
+      {
+        "label": "neural stimulation",
+        "n_queries": 1,
+        "precision_at_k": 0.8,
+        "recall_at_k": 1.0
+      },
+      {
+        "label": "neuroanatomy",
+        "n_queries": 1,
+        "precision_at_k": 0.0,
+        "recall_at_k": 0.0
+      },
+      {
+        "label": "neurodegenerative disease",
+        "n_queries": 1,
+        "precision_at_k": 0.2,
+        "recall_at_k": 1.0
+      },
+      {
+        "label": "neurodevelopmental disorders",
+        "n_queries": 1,
+        "precision_at_k": 1.0,
+        "recall_at_k": 1.0
+      },
+      {
+        "label": "neurogenesis",
+        "n_queries": 1,
+        "precision_at_k": 0.8,
+        "recall_at_k": 1.0
+      },
+      {
+        "label": "neuroimaging",
+        "n_queries": 1,
+        "precision_at_k": 0.0,
+        "recall_at_k": 0.0
+      },
+      {
+        "label": "affective neuroscience",
+        "n_queries": 1,
+        "precision_at_k": 1.0,
+        "recall_at_k": 1.0
+      },
+      {
+        "label": "neuronal development",
+        "n_queries": 1,
+        "precision_at_k": 0.4,
+        "recall_at_k": 1.0
+      },
+      {
+        "label": "neuronal firing",
+        "n_queries": 1,
+        "precision_at_k": 0.4,
+        "recall_at_k": 1.0
+      },
+      {
+        "label": "neuronal signaling",
+        "n_queries": 1,
+        "precision_at_k": 0.2,
+        "recall_at_k": 1.0
+      },
+      {
+        "label": "neurophysiology",
+        "n_queries": 1,
+        "precision_at_k": 0.0,
+        "recall_at_k": 0.0
+      },
+      {
+        "label": "neuroprotection",
+        "n_queries": 1,
+        "precision_at_k": 0.4,
+        "recall_at_k": 1.0
+      },
+      {
+        "label": "neuropsychiatric disorders",
+        "n_queries": 1,
+        "precision_at_k": 0.0,
+        "recall_at_k": 0.0
+      },
+      {
+        "label": "aging",
+        "n_queries": 1,
+        "precision_at_k": 0.0,
+        "recall_at_k": 0.0
+      },
+      {
+        "label": "neurostimulation",
+        "n_queries": 1,
+        "precision_at_k": 0.0,
+        "recall_at_k": 0.0
+      },
+      {
+        "label": "neurosurgery",
+        "n_queries": 1,
+        "precision_at_k": 0.4,
+        "recall_at_k": 1.0
+      },
+      {
+        "label": "nmr spectroscopy",
+        "n_queries": 1,
+        "precision_at_k": 0.2,
+        "recall_at_k": 1.0
+      },
+      {
+        "label": "nucleic acids",
+        "n_queries": 1,
+        "precision_at_k": 0.6,
+        "recall_at_k": 1.0
+      },
+      {
+        "label": "nutrition",
+        "n_queries": 1,
+        "precision_at_k": 0.8,
+        "recall_at_k": 1.0
+      },
+      {
+        "label": "agricultural entomology",
+        "n_queries": 1,
+        "precision_at_k": 1.0,
+        "recall_at_k": 1.0
+      },
+      {
+        "label": "occupational burnout",
+        "n_queries": 1,
+        "precision_at_k": 1.0,
+        "recall_at_k": 1.0
+      },
+      {
+        "label": "ophthalmology",
+        "n_queries": 1,
+        "precision_at_k": 0.0,
+        "recall_at_k": 0.0
+      },
+      {
+        "label": "optimization algorithms",
+        "n_queries": 1,
+        "precision_at_k": 0.6,
+        "recall_at_k": 1.0
+      },
+      {
+        "label": "oral cavity",
+        "n_queries": 1,
+        "precision_at_k": 0.2,
+        "recall_at_k": 1.0
+      },
+      {
+        "label": "organic compounds",
+        "n_queries": 1,
+        "precision_at_k": 0.0,
+        "recall_at_k": 0.0
+      },
+      {
+        "label": "air pollution",
+        "n_queries": 1,
+        "precision_at_k": 0.4,
+        "recall_at_k": 1.0
+      },
+      {
+        "label": "anatomy",
+        "n_queries": 1,
+        "precision_at_k": 0.4,
+        "recall_at_k": 1.0
+      },
+      {
+        "label": "otolaryngology",
+        "n_queries": 1,
+        "precision_at_k": 0.2,
+        "recall_at_k": 1.0
+      },
+      {
+        "label": "overall survival",
+        "n_queries": 1,
+        "precision_at_k": 0.8,
+        "recall_at_k": 1.0
+      },
+      {
+        "label": "oxidative stress",
+        "n_queries": 1,
+        "precision_at_k": 1.0,
+        "recall_at_k": 1.0
+      },
+      {
+        "label": "p",
+        "n_queries": 1,
+        "precision_at_k": 1.0,
+        "recall_at_k": 1.0
+      },
+      {
+        "label": "pain",
+        "n_queries": 1,
+        "precision_at_k": 0.4,
+        "recall_at_k": 1.0
+      },
+      {
+        "label": "pain measurement",
+        "n_queries": 1,
+        "precision_at_k": 1.0,
+        "recall_at_k": 1.0
+      },
+      {
+        "label": "parasitic infections",
+        "n_queries": 1,
+        "precision_at_k": 0.0,
+        "recall_at_k": 0.0
+      },
+      {
+        "label": "pathway enrichment",
+        "n_queries": 1,
+        "precision_at_k": 1.0,
+        "recall_at_k": 1.0
+      },
+      {
+        "label": "pattern recognition",
+        "n_queries": 1,
+        "precision_at_k": 0.0,
+        "recall_at_k": 0.0
+      },
+      {
+        "label": "pcr",
+        "n_queries": 1,
+        "precision_at_k": 1.0,
+        "recall_at_k": 1.0
+      },
+      {
+        "label": "pediatric neuroenhancement",
+        "n_queries": 1,
+        "precision_at_k": 0.8,
+        "recall_at_k": 1.0
+      },
+      {
+        "label": "perinatal outcomes",
+        "n_queries": 1,
+        "precision_at_k": 0.0,
+        "recall_at_k": 0.0
+      },
+      {
+        "label": "peripheral neuropathy",
+        "n_queries": 1,
+        "precision_at_k": 1.0,
+        "recall_at_k": 1.0
+      },
+      {
+        "label": "pharmaceutical drugs",
+        "n_queries": 1,
+        "precision_at_k": 0.0,
+        "recall_at_k": 0.0
+      },
+      {
+        "label": "pharmacokinetics",
+        "n_queries": 1,
+        "precision_at_k": 0.0,
+        "recall_at_k": 0.0
+      },
+      {
+        "label": "pharmacology",
+        "n_queries": 1,
+        "precision_at_k": 0.2,
+        "recall_at_k": 1.0
+      },
+      {
+        "label": "anesthesia",
+        "n_queries": 1,
+        "precision_at_k": 0.8,
+        "recall_at_k": 1.0
+      },
+      {
+        "label": "annotation",
+        "n_queries": 1,
+        "precision_at_k": 0.8,
+        "recall_at_k": 1.0
+      },
+      {
+        "label": "antibody titers",
+        "n_queries": 1,
+        "precision_at_k": 1.0,
+        "recall_at_k": 1.0
+      },
+      {
+        "label": "physical chemistry",
+        "n_queries": 1,
+        "precision_at_k": 0.0,
+        "recall_at_k": 0.0
+      },
+      {
+        "label": "anticancer cytotoxicity",
+        "n_queries": 1,
+        "precision_at_k": 0.0,
+        "recall_at_k": 0.0
+      },
+      {
+        "label": "plant physiology",
+        "n_queries": 1,
+        "precision_at_k": 0.0,
+        "recall_at_k": 0.0
+      },
+      {
+        "label": "rodent handling",
+        "n_queries": 1,
+        "precision_at_k": 0.0,
+        "recall_at_k": 0.0
+      },
+      {
+        "label": "plant regulation",
+        "n_queries": 1,
+        "precision_at_k": 1.0,
+        "recall_at_k": 1.0
+      },
+      {
+        "label": "plant reproduction",
+        "n_queries": 1,
+        "precision_at_k": 0.8,
+        "recall_at_k": 1.0
+      },
+      {
+        "label": "plant stress",
+        "n_queries": 1,
+        "precision_at_k": 0.8,
+        "recall_at_k": 1.0
+      },
+      {
+        "label": "polymer hydrogels",
+        "n_queries": 1,
+        "precision_at_k": 1.0,
+        "recall_at_k": 1.0
+      },
+      {
+        "label": "polymer materials",
+        "n_queries": 1,
+        "precision_at_k": 0.4,
+        "recall_at_k": 1.0
+      },
+      {
+        "label": "rt qpcr",
+        "n_queries": 1,
+        "precision_at_k": 0.0,
+        "recall_at_k": 0.0
+      },
+      {
+        "label": "postoperative management",
+        "n_queries": 1,
+        "precision_at_k": 0.0,
+        "recall_at_k": 0.0
+      },
+      {
+        "label": "postoperative outcomes",
+        "n_queries": 1,
+        "precision_at_k": 0.4,
+        "recall_at_k": 1.0
+      },
+      {
+        "label": "poultry",
+        "n_queries": 1,
+        "precision_at_k": 1.0,
+        "recall_at_k": 1.0
+      },
+      {
+        "label": "pregnancy",
+        "n_queries": 1,
+        "precision_at_k": 0.2,
+        "recall_at_k": 1.0
+      },
+      {
+        "label": "pregnancy outcomes",
+        "n_queries": 1,
+        "precision_at_k": 0.2,
+        "recall_at_k": 1.0
+      },
+      {
+        "label": "pressure injury",
+        "n_queries": 1,
+        "precision_at_k": 0.2,
+        "recall_at_k": 1.0
+      },
+      {
+        "label": "prognostic biomarkers",
+        "n_queries": 1,
+        "precision_at_k": 0.0,
+        "recall_at_k": 0.0
+      },
+      {
+        "label": "proliferation",
+        "n_queries": 1,
+        "precision_at_k": 0.0,
+        "recall_at_k": 0.0
+      },
+      {
+        "label": "protein analysis",
+        "n_queries": 1,
+        "precision_at_k": 0.8,
+        "recall_at_k": 1.0
+      },
+      {
+        "label": "proteomics",
+        "n_queries": 1,
+        "precision_at_k": 0.8,
+        "recall_at_k": 1.0
+      },
+      {
+        "label": "psoriatic arthritis",
+        "n_queries": 1,
+        "precision_at_k": 0.2,
+        "recall_at_k": 1.0
+      },
+      {
+        "label": "psychological disorders",
+        "n_queries": 1,
+        "precision_at_k": 0.8,
+        "recall_at_k": 1.0
+      },
+      {
+        "label": "psychological distress",
+        "n_queries": 1,
+        "precision_at_k": 0.0,
+        "recall_at_k": 0.0
+      },
+      {
+        "label": "psychometric assessment",
+        "n_queries": 1,
+        "precision_at_k": 0.0,
+        "recall_at_k": 0.0
+      },
+      {
+        "label": "psychosocial factors",
+        "n_queries": 1,
+        "precision_at_k": 0.4,
+        "recall_at_k": 1.0
+      },
+      {
+        "label": "psychotherapy",
+        "n_queries": 1,
+        "precision_at_k": 0.2,
+        "recall_at_k": 1.0
+      },
+      {
+        "label": "public health",
+        "n_queries": 1,
+        "precision_at_k": 0.0,
+        "recall_at_k": 0.0
+      },
+      {
+        "label": "purification",
+        "n_queries": 1,
+        "precision_at_k": 0.0,
+        "recall_at_k": 0.0
+      },
+      {
+        "label": "qrt pcr",
+        "n_queries": 1,
+        "precision_at_k": 0.0,
+        "recall_at_k": 0.0
+      },
+      {
+        "label": "quality of",
+        "n_queries": 1,
+        "precision_at_k": 0.0,
+        "recall_at_k": 0.0
+      },
+      {
+        "label": "quantitative genetics",
+        "n_queries": 1,
+        "precision_at_k": 0.2,
+        "recall_at_k": 1.0
+      },
+      {
+        "label": "questionnaire design",
+        "n_queries": 1,
+        "precision_at_k": 0.0,
+        "recall_at_k": 0.0
+      },
+      {
+        "label": "rehabilitation",
+        "n_queries": 1,
+        "precision_at_k": 0.4,
+        "recall_at_k": 1.0
+      },
+      {
+        "label": "reported outcomes",
+        "n_queries": 1,
+        "precision_at_k": 0.4,
+        "recall_at_k": 1.0
+      },
+      {
+        "label": "reproductive endocrinology",
+        "n_queries": 1,
+        "precision_at_k": 0.6,
+        "recall_at_k": 1.0
+      },
+      {
+        "label": "research design",
+        "n_queries": 1,
+        "precision_at_k": 0.0,
+        "recall_at_k": 0.0
+      },
+      {
+        "label": "sars cov",
+        "n_queries": 1,
+        "precision_at_k": 0.2,
+        "recall_at_k": 1.0
+      },
+      {
+        "label": "sars-cov-2 diagnostics",
+        "n_queries": 1,
+        "precision_at_k": 1.0,
+        "recall_at_k": 1.0
+      },
+      {
+        "label": "respiratory care",
+        "n_queries": 1,
+        "precision_at_k": 0.8,
+        "recall_at_k": 1.0
+      },
+      {
+        "label": "scientific publishing",
+        "n_queries": 1,
+        "precision_at_k": 0.0,
+        "recall_at_k": 0.0
+      },
+      {
+        "label": "risk scoring",
+        "n_queries": 1,
+        "precision_at_k": 0.6,
+        "recall_at_k": 1.0
+      },
+      {
+        "label": "rna biology",
+        "n_queries": 1,
+        "precision_at_k": 0.2,
+        "recall_at_k": 1.0
+      },
+      {
+        "label": "rna secondary",
+        "n_queries": 1,
+        "precision_at_k": 0.0,
+        "recall_at_k": 0.0
+      },
+      {
+        "label": "rna sequencing",
+        "n_queries": 1,
+        "precision_at_k": 0.0,
+        "recall_at_k": 0.0
+      },
+      {
+        "label": "screening",
+        "n_queries": 1,
+        "precision_at_k": 0.0,
+        "recall_at_k": 0.0
+      },
+      {
+        "label": "survival",
+        "n_queries": 1,
+        "precision_at_k": 0.0,
+        "recall_at_k": 0.0
+      },
+      {
+        "label": "systematic review",
+        "n_queries": 1,
+        "precision_at_k": 0.4,
+        "recall_at_k": 1.0
+      },
+      {
+        "label": "antioxidants",
+        "n_queries": 1,
+        "precision_at_k": 0.0,
+        "recall_at_k": 0.0
+      },
+      {
+        "label": "t signaling",
+        "n_queries": 1,
+        "precision_at_k": 0.8,
+        "recall_at_k": 1.0
+      },
+      {
+        "label": "taxonomy",
+        "n_queries": 1,
+        "precision_at_k": 0.0,
+        "recall_at_k": 0.0
+      },
+      {
+        "label": "tcga",
+        "n_queries": 1,
+        "precision_at_k": 1.0,
+        "recall_at_k": 1.0
+      },
+      {
+        "label": "technology acceptance",
+        "n_queries": 1,
+        "precision_at_k": 0.4,
+        "recall_at_k": 1.0
+      },
+      {
+        "label": "antifungal agents",
+        "n_queries": 1,
+        "precision_at_k": 0.0,
+        "recall_at_k": 0.0
+      },
+      {
+        "label": "phylogenetics",
+        "n_queries": 1,
+        "precision_at_k": 0.0,
+        "recall_at_k": 0.0
+      },
+      {
+        "label": "sepsis",
+        "n_queries": 1,
+        "precision_at_k": 0.4,
+        "recall_at_k": 1.0
+      },
+      {
+        "label": "tracking",
+        "n_queries": 1,
+        "precision_at_k": 0.8,
+        "recall_at_k": 1.0
+      },
+      {
+        "label": "trajectory error",
+        "n_queries": 1,
+        "precision_at_k": 0.8,
+        "recall_at_k": 1.0
+      },
+      {
+        "label": "traumatic brain",
+        "n_queries": 1,
+        "precision_at_k": 0.8,
+        "recall_at_k": 1.0
+      },
+      {
+        "label": "tuberculosis diagnosis",
+        "n_queries": 1,
+        "precision_at_k": 0.0,
+        "recall_at_k": 0.0
+      },
+      {
+        "label": "signal processing",
+        "n_queries": 1,
+        "precision_at_k": 0.0,
+        "recall_at_k": 0.0
+      },
+      {
+        "label": "tumor microenvironment",
+        "n_queries": 1,
+        "precision_at_k": 1.0,
+        "recall_at_k": 1.0
+      },
+      {
+        "label": "tumor models",
+        "n_queries": 1,
+        "precision_at_k": 0.0,
+        "recall_at_k": 0.0
+      },
+      {
+        "label": "type 2",
+        "n_queries": 1,
+        "precision_at_k": 0.0,
+        "recall_at_k": 0.0
+      },
+      {
+        "label": "single sequencing",
+        "n_queries": 1,
+        "precision_at_k": 0.8,
+        "recall_at_k": 1.0
+      },
+      {
+        "label": "vaccine hesitancy",
+        "n_queries": 1,
+        "precision_at_k": 0.0,
+        "recall_at_k": 0.0
+      },
+      {
+        "label": "vascular disease",
+        "n_queries": 1,
+        "precision_at_k": 0.6,
+        "recall_at_k": 1.0
+      },
+      {
+        "label": "vascular grafts",
+        "n_queries": 1,
+        "precision_at_k": 0.0,
+        "recall_at_k": 0.0
+      },
+      {
+        "label": "vascular interventions",
+        "n_queries": 1,
+        "precision_at_k": 0.4,
+        "recall_at_k": 1.0
+      },
+      {
+        "label": "veterinary medicine",
+        "n_queries": 1,
+        "precision_at_k": 0.8,
+        "recall_at_k": 1.0
+      },
+      {
+        "label": "viability",
+        "n_queries": 1,
+        "precision_at_k": 1.0,
+        "recall_at_k": 1.0
+      },
+      {
+        "label": "skeletal muscle",
+        "n_queries": 1,
+        "precision_at_k": 0.6,
+        "recall_at_k": 1.0
+      },
+      {
+        "label": "virus assays",
+        "n_queries": 1,
+        "precision_at_k": 0.0,
+        "recall_at_k": 0.0
+      },
+      {
+        "label": "virus host",
+        "n_queries": 1,
+        "precision_at_k": 0.2,
+        "recall_at_k": 1.0
+      },
+      {
+        "label": "skin lesions",
+        "n_queries": 1,
+        "precision_at_k": 0.0,
+        "recall_at_k": 0.0
+      },
+      {
+        "label": "visual perception",
+        "n_queries": 1,
+        "precision_at_k": 0.6,
+        "recall_at_k": 1.0
+      },
+      {
+        "label": "visualization",
+        "n_queries": 1,
+        "precision_at_k": 0.4,
+        "recall_at_k": 1.0
+      },
+      {
+        "label": "antimicrobial therapy",
+        "n_queries": 1,
+        "precision_at_k": 0.0,
+        "recall_at_k": 0.0
+      },
+      {
+        "label": "biochemical assays",
+        "n_queries": 1,
+        "precision_at_k": 0.4,
+        "recall_at_k": 1.0
+      },
+      {
+        "label": "biodegradable polymers",
+        "n_queries": 1,
+        "precision_at_k": 0.6,
+        "recall_at_k": 1.0
+      },
+      {
+        "label": "biofilms",
+        "n_queries": 1,
+        "precision_at_k": 0.6,
+        "recall_at_k": 1.0
+      },
+      {
+        "label": "bioinformatics",
+        "n_queries": 1,
+        "precision_at_k": 0.0,
+        "recall_at_k": 0.0
+      },
+      {
+        "label": "biomarkers",
+        "n_queries": 1,
+        "precision_at_k": 0.2,
+        "recall_at_k": 1.0
+      },
+      {
+        "label": "biosensors",
+        "n_queries": 1,
+        "precision_at_k": 0.8,
+        "recall_at_k": 1.0
+      },
+      {
+        "label": "biospecimen processing",
+        "n_queries": 1,
+        "precision_at_k": 0.0,
+        "recall_at_k": 0.0
+      },
+      {
+        "label": "sleep",
+        "n_queries": 1,
+        "precision_at_k": 0.6,
+        "recall_at_k": 1.0
+      },
+      {
+        "label": "blood brain",
+        "n_queries": 1,
+        "precision_at_k": 0.4,
+        "recall_at_k": 1.0
+      },
+      {
+        "label": "body composition",
+        "n_queries": 1,
+        "precision_at_k": 0.0,
+        "recall_at_k": 0.0
+      },
+      {
+        "label": "body mass",
+        "n_queries": 1,
+        "precision_at_k": 0.4,
+        "recall_at_k": 1.0
+      },
+      {
+        "label": "bone metabolism",
+        "n_queries": 1,
+        "precision_at_k": 1.0,
+        "recall_at_k": 1.0
+      },
+      {
+        "label": "bone remodeling",
+        "n_queries": 1,
+        "precision_at_k": 0.6,
+        "recall_at_k": 1.0
+      },
+      {
+        "label": "bone tumors",
+        "n_queries": 1,
+        "precision_at_k": 0.0,
+        "recall_at_k": 0.0
+      },
+      {
+        "label": "brain connectivity",
+        "n_queries": 1,
+        "precision_at_k": 0.2,
+        "recall_at_k": 1.0
+      },
+      {
+        "label": "brain imaging",
+        "n_queries": 1,
+        "precision_at_k": 0.6,
+        "recall_at_k": 1.0
+      },
+      {
+        "label": "brain mri",
+        "n_queries": 1,
+        "precision_at_k": 0.8,
+        "recall_at_k": 1.0
+      },
+      {
+        "label": "social determinants",
+        "n_queries": 1,
+        "precision_at_k": 0.0,
+        "recall_at_k": 0.0
+      },
+      {
+        "label": "cancer biology",
+        "n_queries": 1,
+        "precision_at_k": 0.4,
+        "recall_at_k": 1.0
+      },
+      {
+        "label": "cancer biomarkers",
+        "n_queries": 1,
+        "precision_at_k": 0.4,
+        "recall_at_k": 1.0
+      },
+      {
+        "label": "cancer care",
+        "n_queries": 1,
+        "precision_at_k": 1.0,
+        "recall_at_k": 1.0
+      },
+      {
+        "label": "software tools",
+        "n_queries": 1,
+        "precision_at_k": 0.0,
+        "recall_at_k": 0.0
+      },
+      {
+        "label": "cancer classification",
+        "n_queries": 1,
+        "precision_at_k": 0.2,
+        "recall_at_k": 1.0
+      },
+      {
+        "label": "cancer detection",
+        "n_queries": 1,
+        "precision_at_k": 0.6,
+        "recall_at_k": 1.0
+      },
+      {
+        "label": "cancer diagnosis",
+        "n_queries": 1,
+        "precision_at_k": 0.2,
+        "recall_at_k": 1.0
+      },
+      {
+        "label": "cancer epidemiology",
+        "n_queries": 1,
+        "precision_at_k": 1.0,
+        "recall_at_k": 1.0
+      },
+      {
+        "label": "cancer genetics",
+        "n_queries": 1,
+        "precision_at_k": 1.0,
+        "recall_at_k": 1.0
+      },
+      {
+        "label": "somatic mutations",
+        "n_queries": 1,
+        "precision_at_k": 0.2,
+        "recall_at_k": 1.0
+      },
+      {
+        "label": "cancer imaging",
+        "n_queries": 1,
+        "precision_at_k": 0.0,
+        "recall_at_k": 0.0
+      },
+      {
+        "label": "spectroscopic",
+        "n_queries": 1,
+        "precision_at_k": 0.8,
+        "recall_at_k": 1.0
+      },
+      {
+        "label": "cancer metastasis",
+        "n_queries": 1,
+        "precision_at_k": 0.6,
+        "recall_at_k": 1.0
+      },
+      {
+        "label": "time series",
+        "n_queries": 1,
+        "precision_at_k": 0.0,
+        "recall_at_k": 0.0
+      }
+    ]
+  },
+  "retrieval_filtered": {
+    "k": 5,
+    "n_queries": 71,
+    "macro_precision_at_k": 0.5859154929577465,
+    "macro_recall_at_k": 0.8028169014084507,
+    "per_label": [
+      {
+        "label": "statistical",
+        "n_queries": 18,
+        "precision_at_k": 0.6000000000000001,
+        "recall_at_k": 0.8333333333333334
+      },
+      {
+        "label": "covid19",
+        "n_queries": 12,
+        "precision_at_k": 0.5666666666666667,
+        "recall_at_k": 0.75
+      },
+      {
+        "label": "gene expression",
+        "n_queries": 11,
+        "precision_at_k": 0.49090909090909096,
+        "recall_at_k": 0.8181818181818182
+      },
+      {
+        "label": "culture",
+        "n_queries": 7,
+        "precision_at_k": 0.5142857142857143,
+        "recall_at_k": 0.7142857142857143
+      },
+      {
+        "label": "medical imaging",
+        "n_queries": 7,
+        "precision_at_k": 0.6571428571428571,
+        "recall_at_k": 0.8571428571428571
+      },
+      {
+        "label": "infectious diseases",
+        "n_queries": 6,
+        "precision_at_k": 0.7666666666666666,
+        "recall_at_k": 0.8333333333333334
+      },
+      {
+        "label": "machine learning",
+        "n_queries": 5,
+        "precision_at_k": 0.64,
+        "recall_at_k": 0.8
+      },
+      {
+        "label": "inflammation",
+        "n_queries": 5,
+        "precision_at_k": 0.52,
+        "recall_at_k": 0.8
+      }
+    ]
+  }
+}

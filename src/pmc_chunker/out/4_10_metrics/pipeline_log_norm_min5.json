@@ -1,0 +1,25 @@
+{
+  "run_at": "2025-11-16T22:55:01.390241",
+  "k": 5,
+  "min_queries": 5,
+  "paths": {
+    "queries_eval_norm": "C:\\Users\\Administrator\\Projects\\TEAMPROJECT\\biomed-rag-agent\\src\\pmc_chunker\\out\\4_8_eval_setup\\queries_eval_norm.jsonl",
+    "retrieval_results": "C:\\Users\\Administrator\\Projects\\TEAMPROJECT\\biomed-rag-agent\\src\\pmc_chunker\\out\\4_9_retrieval\\retrieval_results.jsonl",
+    "metrics_report_norm_min5": "C:\\Users\\Administrator\\Projects\\TEAMPROJECT\\biomed-rag-agent\\src\\pmc_chunker\\out\\4_10_metrics\\metrics_report_norm_min5.json",
+    "evaluation_summary_norm_min5": "C:\\Users\\Administrator\\Projects\\TEAMPROJECT\\biomed-rag-agent\\src\\pmc_chunker\\out\\4_10_metrics\\evaluation_summary_norm_min5.csv"
+  },
+  "input_checksums": {
+    "queries_eval_norm_sha256": "7737255abc712fb2d33d69d2225849cc744088bbfb71116d388f4eab59db9f75",
+    "retrieval_results_sha256": "28bbaf722c597cbdfcc52a89642fb656ef909b52f264af152a2ce3db99a3ca47"
+  },
+  "software": {
+    "python_version": "3.10.0 (tags/v3.10.0:b494f59, Oct  4 2021, 19:00:18) [MSC v.1929 64 bit (AMD64)]",
+    "platform": "Windows-10-10.0.26200-SP0",
+    "pandas_version": "2.3.3"
+  },
+  "env": {
+    "cwd": "C:\\Users\\Administrator\\Projects\\TEAMPROJECT\\biomed-rag-agent"
+  },
+  "n_queries_all": 613,
+  "n_queries_filtered": 71
+}

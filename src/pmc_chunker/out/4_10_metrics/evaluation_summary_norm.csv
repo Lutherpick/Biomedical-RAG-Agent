@@ -1,0 +1,448 @@
+label,n_queries,precision_at_k,recall_at_k,is_macro_row
+statistical,18,0.6000000000000001,0.8333333333333334,False
+covid19,12,0.5666666666666667,0.75,False
+gene expression,11,0.49090909090909096,0.8181818181818182,False
+culture,7,0.5142857142857143,0.7142857142857143,False
+medical imaging,7,0.6571428571428571,0.8571428571428571,False
+infectious diseases,6,0.7666666666666666,0.8333333333333334,False
+inflammation,5,0.52,0.8,False
+machine learning,5,0.64,0.8,False
+cardiovascular disease,4,0.25,0.5,False
+clinical,4,0.4,1.0,False
+vaccination,4,0.25,0.25,False
+neuroscience,4,0.4,0.5,False
+antimicrobial resistance,4,0.65,1.0,False
+dna damage,3,0.7999999999999999,1.0,False
+analytical,3,0.6,1.0,False
+neurological disorders,3,0.26666666666666666,0.6666666666666666,False
+pharmacotherapy,3,0.39999999999999997,0.6666666666666666,False
+plant genomics,3,1.0,1.0,False
+virology,3,0.7333333333333334,1.0,False
+deep learning,3,0.13333333333333333,0.3333333333333333,False
+health economics,3,0.0,0.0,False
+sars-cov-2,3,1.0,1.0,False
+micrornas,3,0.6,1.0,False
+statistical modeling,3,0.06666666666666667,0.3333333333333333,False
+genome assembly,3,0.39999999999999997,0.6666666666666666,False
+t,3,0.6,0.6666666666666666,False
+dna methylation,3,0.7333333333333334,1.0,False
+lipid metabolism,3,0.6,1.0,False
+mental health,3,0.20000000000000004,0.6666666666666666,False
+models,3,0.6,0.6666666666666666,False
+nanomaterials,3,0.26666666666666666,0.6666666666666666,False
+network,3,0.4666666666666666,0.6666666666666666,False
+caregiving,2,0.4,0.5,False
+genome sequencing,2,0.5,1.0,False
+conflict of,2,0.5,0.5,False
+dietary intake,2,0.1,0.5,False
+epidemiology,2,0.3,0.5,False
+hiv infection,2,0.4,1.0,False
+behavior,2,0.2,0.5,False
+child health,2,0.2,1.0,False
+electrochemical sensors,2,0.0,0.0,False
+healthcare workforce,2,0.2,0.5,False
+immune regulation,2,0.3,0.5,False
+gut microbiota,2,0.7,1.0,False
+health communication,2,0.3,0.5,False
+surgical techniques,2,0.4,0.5,False
+alzheimer disease,2,0.30000000000000004,1.0,False
+clinical management,2,0.2,0.5,False
+drug delivery,2,0.4,1.0,False
+antibodies,2,0.4,1.0,False
+cancer therapeutics,2,0.7,1.0,False
+demographics,2,0.2,0.5,False
+signaling,2,0.6000000000000001,1.0,False
+molecular cloning,2,0.2,0.5,False
+lncrna,2,0.6,1.0,False
+nanoparticle drug,2,0.7,1.0,False
+computational genomics,2,0.4,1.0,False
+materials characterization,2,0.4,1.0,False
+comparative genomics,2,0.8,1.0,False
+obesity,2,0.7,1.0,False
+organic synthesis,2,0.7,1.0,False
+orthopedic surgery,2,0.7,1.0,False
+immune,2,0.6,1.0,False
+apoptosis,2,0.7,1.0,False
+physical activity,2,0.1,0.5,False
+informed consent,2,0.8,1.0,False
+plant polyphenols,2,1.0,1.0,False
+population genetics,2,0.30000000000000004,1.0,False
+research ethics,2,0.9,1.0,False
+research methodology,2,0.8,1.0,False
+risk prediction,2,0.5,1.0,False
+roc,2,0.4,1.0,False
+covid-19,2,0.9,1.0,False
+tissue engineering,2,0.6,1.0,False
+tumor immunology,2,0.4,1.0,False
+diabetes mellitus,2,0.9,1.0,False
+microbiome,2,0.4,0.5,False
+visual attention,2,0.1,0.5,False
+genetic variants,2,0.5,1.0,False
+cancer,2,0.8,1.0,False
+cancer chemotherapy,2,0.3,0.5,False
+cancer genomics,2,0.5,1.0,False
+cancer immunotherapy,2,0.8,1.0,False
+spinal disorders,1,1.0,1.0,False
+stent endothelium,1,0.0,0.0,False
+stress epigenetics,1,1.0,1.0,False
+structural,1,0.0,0.0,False
+aquatic ecology,1,0.4,1.0,False
+structure,1,0.6,1.0,False
+supplementary materials,1,1.0,1.0,False
+surgical outcomes,1,0.6,1.0,False
+surgical procedures,1,1.0,1.0,False
+antimicrobial nanoparticles,1,1.0,1.0,False
+cancer surgery,1,1.0,1.0,False
+cancer survival,1,1.0,1.0,False
+cancer therapies,1,0.0,0.0,False
+cancer therapy,1,0.6,1.0,False
+cancer transcriptomics,1,0.0,0.0,False
+cancer treatment,1,0.0,0.0,False
+carbon cycling,1,0.6,1.0,False
+cardiac arrest,1,0.2,1.0,False
+cardiac hemodynamics,1,0.8,1.0,False
+cardiology,1,0.6,1.0,False
+cardiopulmonary monitoring,1,0.4,1.0,False
+central nervous,1,0.6,1.0,False
+cerebral autoregulation,1,0.2,1.0,False
+cerebral ischemia,1,0.6,1.0,False
+cervical neoplasia,1,0.0,0.0,False
+chemical synthesis,1,0.0,0.0,False
+cheminformatics,1,1.0,1.0,False
+child psychopathology,1,0.8,1.0,False
+child psychosocial,1,0.0,0.0,False
+cirrhosis,1,0.4,1.0,False
+climate change,1,1.0,1.0,False
+clinical biomarkers,1,0.4,1.0,False
+clinical characteristics,1,0.0,0.0,False
+clinical criteria,1,0.0,0.0,False
+clinical design,1,0.0,0.0,False
+clinical education,1,0.2,1.0,False
+clinical research,1,0.0,0.0,False
+clinical statistics,1,0.4,1.0,False
+cognitive neuroscience,1,0.4,1.0,False
+cognitive processes,1,0.8,1.0,False
+cohort,1,0.0,0.0,False
+cohorts,1,0.0,0.0,False
+commercial reagents,1,0.0,0.0,False
+computational,1,0.4,1.0,False
+concrete mixtures,1,1.0,1.0,False
+construction materials,1,1.0,1.0,False
+correlation,1,0.8,1.0,False
+cortical networks,1,0.8,1.0,False
+cost effectiveness,1,0.2,1.0,False
+structural mri,1,0.4,1.0,False
+covid19 lockdown,1,0.0,0.0,False
+covid19 pandemic,1,0.6,1.0,False
+covid19 vaccination,1,1.0,1.0,False
+crop physiology,1,0.0,0.0,False
+crop yield,1,0.8,1.0,False
+csf serum,1,0.6,1.0,False
+cytosponge,1,1.0,1.0,False
+decision making,1,1.0,1.0,False
+dental materials,1,0.0,0.0,False
+diabetes management,1,1.0,1.0,False
+diabetic kidney,1,0.6,1.0,False
+diabetic nephropathy,1,0.0,0.0,False
+differentiation,1,0.0,0.0,False
+digital health,1,0.0,0.0,False
+disaster management,1,1.0,1.0,False
+dna detection,1,0.0,0.0,False
+dna extraction,1,0.4,1.0,False
+dna nanotechnology,1,0.4,1.0,False
+dna repair,1,0.0,0.0,False
+drug adverse,1,0.0,0.0,False
+drug dosing,1,1.0,1.0,False
+drug effects,1,0.0,0.0,False
+drug mechanisms,1,0.0,0.0,False
+drug nanocarriers,1,0.0,0.0,False
+drug resistance,1,0.4,1.0,False
+ecology,1,0.6,1.0,False
+editing,1,0.6,1.0,False
+education interventions,1,0.2,1.0,False
+electroencephalography,1,0.0,0.0,False
+electrophysiology,1,0.4,1.0,False
+elisa,1,0.6,1.0,False
+endotracheal intubation,1,0.0,0.0,False
+energy interaction,1,1.0,1.0,False
+engineering,1,0.0,0.0,False
+environmental exposure,1,0.6,1.0,False
+epidemic modeling,1,1.0,1.0,False
+epidemiological modeling,1,0.0,0.0,False
+epigenetic addiction,1,1.0,1.0,False
+ethics,1,1.0,1.0,False
+exosomal rna,1,1.0,1.0,False
+exosomes,1,0.0,0.0,False
+experiments,1,0.0,0.0,False
+flow cytometry,1,0.8,1.0,False
+fluid dynamics,1,0.0,0.0,False
+fluorescence images,1,0.8,1.0,False
+fluorescent probes,1,0.6,1.0,False
+food consumption,1,1.0,1.0,False
+fungal pathogens,1,0.0,0.0,False
+gastrointestinal disorders,1,0.0,0.0,False
+genetic association,1,0.2,1.0,False
+genetic disorders,1,1.0,1.0,False
+genetic polymorphisms,1,0.0,0.0,False
+genetic testing,1,0.2,1.0,False
+genetics,1,0.4,1.0,False
+genome editing,1,0.6,1.0,False
+genome wide,1,0.0,0.0,False
+genomewide association,1,0.6,1.0,False
+genomic variants,1,0.4,1.0,False
+geospatial,1,0.0,0.0,False
+glaucoma,1,0.8,1.0,False
+glioma,1,1.0,1.0,False
+global health,1,0.6,1.0,False
+glucose monitoring,1,0.6,1.0,False
+graphpad prism,1,0.0,0.0,False
+green finance,1,1.0,1.0,False
+health interventions,1,0.0,0.0,False
+health program,1,0.0,0.0,False
+healthcare access,1,0.2,1.0,False
+healthcare governance,1,0.6,1.0,False
+healthcare implementation,1,0.0,0.0,False
+healthcare leadership,1,0.6,1.0,False
+heart failure,1,0.0,0.0,False
+hematology,1,0.0,0.0,False
+hemodynamic monitoring,1,0.0,0.0,False
+hemodynamics,1,0.0,0.0,False
+hepatocellular carcinoma,1,1.0,1.0,False
+histology,1,0.0,0.0,False
+histomorphometry,1,0.0,0.0,False
+histopathology,1,0.0,0.0,False
+hormone signaling,1,0.0,0.0,False
+hypoxia signaling,1,1.0,1.0,False
+icd11,1,0.0,0.0,False
+immune responses,1,0.6,1.0,False
+immunoassays,1,0.0,0.0,False
+immunofluorescence,1,0.6,1.0,False
+immunostaining,1,0.0,0.0,False
+immunotherapy,1,0.8,1.0,False
+immunotherapy vaccines,1,1.0,1.0,False
+implants,1,0.4,1.0,False
+infection models,1,0.0,0.0,False
+artificial intelligence,1,0.4,1.0,False
+autoimmune diseases,1,1.0,1.0,False
+autonomic nervous,1,0.0,0.0,False
+ire1 xbp1,1,0.4,1.0,False
+ischemia reperfusion,1,0.8,1.0,False
+kidney disease,1,0.0,0.0,False
+laboratory,1,0.2,1.0,False
+laboratory assays,1,0.4,1.0,False
+leukemia,1,0.4,1.0,False
+ligand binding,1,0.0,0.0,False
+availability,1,1.0,1.0,False
+lipidomics,1,0.6,1.0,False
+livestock production,1,0.8,1.0,False
+bacterial cultures,1,0.8,1.0,False
+locomotor function,1,1.0,1.0,False
+lung inflammation,1,0.4,1.0,False
+bacterial genomics,1,0.0,0.0,False
+mass spectrometry,1,0.8,1.0,False
+bacterial pathogenesis,1,0.6,1.0,False
+materials testing,1,1.0,1.0,False
+maternal health,1,0.0,0.0,False
+measurement,1,0.0,0.0,False
+measurements,1,0.0,0.0,False
+mechanics,1,0.0,0.0,False
+bibliometrics,1,1.0,1.0,False
+membrane,1,0.4,1.0,False
+memory circuits,1,0.2,1.0,False
+secondary metabolites,1,0.0,0.0,False
+mesenchymal stem,1,1.0,1.0,False
+metabolic pathways,1,0.2,1.0,False
+metabolic syndrome,1,0.4,1.0,False
+metabolism,1,0.2,1.0,False
+metabolomics,1,0.2,1.0,False
+metamaterials,1,0.0,0.0,False
+methodology,1,0.0,0.0,False
+methods,1,0.0,0.0,False
+microbial,1,0.4,1.0,False
+microbial communities,1,1.0,1.0,False
+microbial cultivation,1,0.8,1.0,False
+microbial diagnostics,1,0.6,1.0,False
+microbial metabolism,1,0.0,0.0,False
+cancer signaling,1,0.4,1.0,False
+microbiome diversity,1,0.8,1.0,False
+microglia,1,1.0,1.0,False
+microglial inflammation,1,0.4,1.0,False
+microrna,1,1.0,1.0,False
+telemedicine,1,0.0,0.0,False
+microscopy,1,0.2,1.0,False
+microscopy imaging,1,0.8,1.0,False
+missing,1,0.4,1.0,False
+mitochondrial function,1,0.8,1.0,False
+survey methodology,1,0.4,1.0,False
+blood biomarkers,1,0.0,0.0,False
+mortality outcomes,1,0.6,1.0,False
+motor function,1,0.8,1.0,False
+motor performance,1,1.0,1.0,False
+mrna,1,1.0,1.0,False
+muscle mri,1,1.0,1.0,False
+musculoskeletal assessment,1,0.4,1.0,False
+myeloid leukemia,1,0.0,0.0,False
+water treatment,1,1.0,1.0,False
+nanomedicine,1,0.2,1.0,False
+abbreviations,1,1.0,1.0,False
+nanoparticles,1,0.8,1.0,False
+neoplasms,1,0.2,1.0,False
+administrative statements,1,0.0,0.0,False
+network security,1,0.4,1.0,False
+neural stem,1,0.8,1.0,False
+neural stimulation,1,0.8,1.0,False
+neuroanatomy,1,0.0,0.0,False
+neurodegenerative disease,1,0.2,1.0,False
+neurodevelopmental disorders,1,1.0,1.0,False
+neurogenesis,1,0.8,1.0,False
+neuroimaging,1,0.0,0.0,False
+affective neuroscience,1,1.0,1.0,False
+neuronal development,1,0.4,1.0,False
+neuronal firing,1,0.4,1.0,False
+neuronal signaling,1,0.2,1.0,False
+neurophysiology,1,0.0,0.0,False
+neuroprotection,1,0.4,1.0,False
+neuropsychiatric disorders,1,0.0,0.0,False
+aging,1,0.0,0.0,False
+neurostimulation,1,0.0,0.0,False
+neurosurgery,1,0.4,1.0,False
+nmr spectroscopy,1,0.2,1.0,False
+nucleic acids,1,0.6,1.0,False
+nutrition,1,0.8,1.0,False
+agricultural entomology,1,1.0,1.0,False
+occupational burnout,1,1.0,1.0,False
+ophthalmology,1,0.0,0.0,False
+optimization algorithms,1,0.6,1.0,False
+oral cavity,1,0.2,1.0,False
+organic compounds,1,0.0,0.0,False
+air pollution,1,0.4,1.0,False
+anatomy,1,0.4,1.0,False
+otolaryngology,1,0.2,1.0,False
+overall survival,1,0.8,1.0,False
+oxidative stress,1,1.0,1.0,False
+p,1,1.0,1.0,False
+pain,1,0.4,1.0,False
+pain measurement,1,1.0,1.0,False
+parasitic infections,1,0.0,0.0,False
+pathway enrichment,1,1.0,1.0,False
+pattern recognition,1,0.0,0.0,False
+pcr,1,1.0,1.0,False
+pediatric neuroenhancement,1,0.8,1.0,False
+perinatal outcomes,1,0.0,0.0,False
+peripheral neuropathy,1,1.0,1.0,False
+pharmaceutical drugs,1,0.0,0.0,False
+pharmacokinetics,1,0.0,0.0,False
+pharmacology,1,0.2,1.0,False
+anesthesia,1,0.8,1.0,False
+annotation,1,0.8,1.0,False
+antibody titers,1,1.0,1.0,False
+physical chemistry,1,0.0,0.0,False
+anticancer cytotoxicity,1,0.0,0.0,False
+plant physiology,1,0.0,0.0,False
+rodent handling,1,0.0,0.0,False
+plant regulation,1,1.0,1.0,False
+plant reproduction,1,0.8,1.0,False
+plant stress,1,0.8,1.0,False
+polymer hydrogels,1,1.0,1.0,False
+polymer materials,1,0.4,1.0,False
+rt qpcr,1,0.0,0.0,False
+postoperative management,1,0.0,0.0,False
+postoperative outcomes,1,0.4,1.0,False
+poultry,1,1.0,1.0,False
+pregnancy,1,0.2,1.0,False
+pregnancy outcomes,1,0.2,1.0,False
+pressure injury,1,0.2,1.0,False
+prognostic biomarkers,1,0.0,0.0,False
+proliferation,1,0.0,0.0,False
+protein analysis,1,0.8,1.0,False
+proteomics,1,0.8,1.0,False
+psoriatic arthritis,1,0.2,1.0,False
+psychological disorders,1,0.8,1.0,False
+psychological distress,1,0.0,0.0,False
+psychometric assessment,1,0.0,0.0,False
+psychosocial factors,1,0.4,1.0,False
+psychotherapy,1,0.2,1.0,False
+public health,1,0.0,0.0,False
+purification,1,0.0,0.0,False
+qrt pcr,1,0.0,0.0,False
+quality of,1,0.0,0.0,False
+quantitative genetics,1,0.2,1.0,False
+questionnaire design,1,0.0,0.0,False
+rehabilitation,1,0.4,1.0,False
+reported outcomes,1,0.4,1.0,False
+reproductive endocrinology,1,0.6,1.0,False
+research design,1,0.0,0.0,False
+sars cov,1,0.2,1.0,False
+sars-cov-2 diagnostics,1,1.0,1.0,False
+respiratory care,1,0.8,1.0,False
+scientific publishing,1,0.0,0.0,False
+risk scoring,1,0.6,1.0,False
+rna biology,1,0.2,1.0,False
+rna secondary,1,0.0,0.0,False
+rna sequencing,1,0.0,0.0,False
+screening,1,0.0,0.0,False
+survival,1,0.0,0.0,False
+systematic review,1,0.4,1.0,False
+antioxidants,1,0.0,0.0,False
+t signaling,1,0.8,1.0,False
+taxonomy,1,0.0,0.0,False
+tcga,1,1.0,1.0,False
+technology acceptance,1,0.4,1.0,False
+antifungal agents,1,0.0,0.0,False
+phylogenetics,1,0.0,0.0,False
+sepsis,1,0.4,1.0,False
+tracking,1,0.8,1.0,False
+trajectory error,1,0.8,1.0,False
+traumatic brain,1,0.8,1.0,False
+tuberculosis diagnosis,1,0.0,0.0,False
+signal processing,1,0.0,0.0,False
+tumor microenvironment,1,1.0,1.0,False
+tumor models,1,0.0,0.0,False
+type 2,1,0.0,0.0,False
+single sequencing,1,0.8,1.0,False
+vaccine hesitancy,1,0.0,0.0,False
+vascular disease,1,0.6,1.0,False
+vascular grafts,1,0.0,0.0,False
+vascular interventions,1,0.4,1.0,False
+veterinary medicine,1,0.8,1.0,False
+viability,1,1.0,1.0,False
+skeletal muscle,1,0.6,1.0,False
+virus assays,1,0.0,0.0,False
+virus host,1,0.2,1.0,False
+skin lesions,1,0.0,0.0,False
+visual perception,1,0.6,1.0,False
+visualization,1,0.4,1.0,False
+antimicrobial therapy,1,0.0,0.0,False
+biochemical assays,1,0.4,1.0,False
+biodegradable polymers,1,0.6,1.0,False
+biofilms,1,0.6,1.0,False
+bioinformatics,1,0.0,0.0,False
+biomarkers,1,0.2,1.0,False
+biosensors,1,0.8,1.0,False
+biospecimen processing,1,0.0,0.0,False
+sleep,1,0.6,1.0,False
+blood brain,1,0.4,1.0,False
+body composition,1,0.0,0.0,False
+body mass,1,0.4,1.0,False
+bone metabolism,1,1.0,1.0,False
+bone remodeling,1,0.6,1.0,False
+bone tumors,1,0.0,0.0,False
+brain connectivity,1,0.2,1.0,False
+brain imaging,1,0.6,1.0,False
+brain mri,1,0.8,1.0,False
+social determinants,1,0.0,0.0,False
+cancer biology,1,0.4,1.0,False
+cancer biomarkers,1,0.4,1.0,False
+cancer care,1,1.0,1.0,False
+software tools,1,0.0,0.0,False
+cancer classification,1,0.2,1.0,False
+cancer detection,1,0.6,1.0,False
+cancer diagnosis,1,0.2,1.0,False
+cancer epidemiology,1,1.0,1.0,False
+cancer genetics,1,1.0,1.0,False
+somatic mutations,1,0.2,1.0,False
+cancer imaging,1,0.0,0.0,False
+spectroscopic,1,0.8,1.0,False
+cancer metastasis,1,0.6,1.0,False
+time series,1,0.0,0.0,False
+__ALL__,613,0.4551386623164764,0.7047308319738989,True
