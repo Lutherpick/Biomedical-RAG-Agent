@@ -1,0 +1,31 @@
+query_id,error
+q_000000,"Unexpected Response: 400 (Bad Request)
+Raw response content:
+b'{""status"":{""error"":""Wrong input: Vector dimension error: expected dim: 384, got 1536""},""time"":0.002997455}'"
+q_000001,"Unexpected Response: 400 (Bad Request)
+Raw response content:
+b'{""status"":{""error"":""Wrong input: Vector dimension error: expected dim: 384, got 1536""},""time"":0.000390744}'"
+q_000002,"Unexpected Response: 400 (Bad Request)
+Raw response content:
+b'{""status"":{""error"":""Wrong input: Vector dimension error: expected dim: 384, got 1536""},""time"":0.000375024}'"
+q_000003,"Unexpected Response: 400 (Bad Request)
+Raw response content:
+b'{""status"":{""error"":""Wrong input: Vector dimension error: expected dim: 384, got 1536""},""time"":0.000419687}'"
+q_000004,"Unexpected Response: 400 (Bad Request)
+Raw response content:
+b'{""status"":{""error"":""Wrong input: Vector dimension error: expected dim: 384, got 1536""},""time"":0.000405412}'"
+q_000005,"Unexpected Response: 400 (Bad Request)
+Raw response content:
+b'{""status"":{""error"":""Wrong input: Vector dimension error: expected dim: 384, got 1536""},""time"":0.000351408}'"
+q_000006,"Unexpected Response: 400 (Bad Request)
+Raw response content:
+b'{""status"":{""error"":""Wrong input: Vector dimension error: expected dim: 384, got 1536""},""time"":0.000410917}'"
+q_000007,"Unexpected Response: 400 (Bad Request)
+Raw response content:
+b'{""status"":{""error"":""Wrong input: Vector dimension error: expected dim: 384, got 1536""},""time"":0.00040411}'"
+q_000008,"Unexpected Response: 400 (Bad Request)
+Raw response content:
+b'{""status"":{""error"":""Wrong input: Vector dimension error: expected dim: 384, got 1536""},""time"":0.000331001}'"
+q_000009,"Unexpected Response: 400 (Bad Request)
+Raw response content:
+b'{""status"":{""error"":""Wrong input: Vector dimension error: expected dim: 384, got 1536""},""time"":0.000381555}'"

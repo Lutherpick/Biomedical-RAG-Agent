@@ -1,0 +1,4 @@
+metric,value
+precision@5,0.32137030995106036
+recall@5,0.5138662316476346
+n_queries_total,613.0

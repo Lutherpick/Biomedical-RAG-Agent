@@ -1,0 +1,14 @@
+{
+  "timestamp": "2025-11-16T16:39:28.520362Z",
+  "python_version": "3.10.0 (tags/v3.10.0:b494f59, Oct  4 2021, 19:00:18) [MSC v.1929 64 bit (AMD64)]",
+  "queries_eval": {
+    "path": "src\\pmc_chunker\\out\\4_8_eval_setup\\queries_eval.jsonl",
+    "md5": "548caadc97e61c50eda7aa677ca17fe5"
+  },
+  "retrieval_results": {
+    "path": "src\\pmc_chunker\\out\\4_9_retrieval\\retrieval_results.jsonl",
+    "md5": "a5970eb3e581c445087ebf6eae82c0c0"
+  },
+  "k": 5,
+  "n_queries": 613
+}
