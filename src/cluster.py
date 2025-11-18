@@ -38,6 +38,10 @@ except Exception:
     ST_OK = False
 
 
+from sklearn.metrics.pairwise import cosine_similarity
+from sklearn.metrics.pairwise import euclidean_distances
+
+
 # ------------------------- helpers -------------------------
 
 CANDIDATES_DIRECT = ["text", "page_content", "content", "chunk", "chunk_text", "body", "text_content"]
@@ -310,8 +314,28 @@ def main():
     Xp_norm = normalize_rows(Xp)
     C = mbk.cluster_centers_.astype(np.float32, copy=False)
     Cn = normalize_rows(C)
-    dots = (Xp_norm * Cn[labels_u]).sum(axis=1)
+
+
+
+    #properly implemented cosign distance
+    dots = cosine_similarity(Xp_norm,Cn[labels_u]) 
     dist_u = (1.0 - dots).astype(np.float32, copy=False)
+    dist_u = np.diag(dist_u)
+
+    #euclidean distance
+    #dist_u = euclidean_distances(Xp_norm, Cn[labels_u])
+    #dist_u = np.diag(dist_u)
+
+
+    #weird distance
+    #  this was supposed to be the cosign distance. It wasnt properly implemented. weirdly enough it still had some decent results even if it wasnt implemented properly.
+    #  i recommend to experiment with this piece of code a bit. PS: the last meeting demo had this bug still implemented. aka. the results could have been better :/
+    #dots = (Xp_norm * Cn[labels_u]).sum(axis=1)
+    #dist_u = (1.0 - dots).astype(np.float32, copy=False)
+
+
+
+
 
     # ----- expand unique → kept rows
     labels_k = np.fromiter((labels_u[u] for u in backrefs), dtype=np.int32, count=len(backrefs))
@@ -348,6 +372,10 @@ def main():
     df_k.to_csv(assign_alias, index=False, encoding="utf-8")
     np.save(centroids_true, C)
     np.save(centroids_alias, C)
+
+
+    #this is a bit reduntant i think. not currently being used for the labeling. havent had time to ask my college about it :/
+
 
     # cluster size summary
     (df_k["cluster_id"].value_counts().sort_index().rename_axis("cluster_id").to_frame("size")
