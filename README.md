@@ -1,3 +1,163 @@
+# PMC XML Paragraph Chunking Pipeline
+
+This repository builds a ~4 000-article corpus of open-access preclinical animal studies, downloads their full text from PubMed Central (PMC), and converts each article into paragraph-level JSONL “chunks” suitable for semantic search and RAG systems.
+
+The pipeline has four main stages:
+
+1. Build a manifest of 4 000 PMC articles (`build_manifest.py`).
+2. Download JATS/NIHMS XML full texts for those PMCIDs (`download_xmls.py`).
+3. (Optional) Inspect paragraph order for a single article (`jats_probe.py`).
+4. Convert all XMLs into paragraph-level chunks (`parse_chunk.py`), using shared cleaners and splitters from `chunker.py`.
+
+---
+
+## 1. Requirements
+
+Python 3.9+ is recommended.
+
+Install the required third-party packages:
+
+```bash
+pip install pandas requests tqdm tenacity lxml python-dateutil python-dotenv
+
+These are used for PubMed/PMC HTTP requests, CSV handling, retry logic, XML parsing, and incremental metadata summarization.
+
+Environment variables (optional but recommended)
+
+build_manifest.py can use an NCBI API key to increase E-utilities rate limits.
+Create a .env file in the project root, e.g.:
+
+NCBI_API_KEY=your_ncbi_key_here
+
+
+The scripts automatically load this via python-dotenv.
+
+
+Directory Layout
+
+All scripts assume you run them from the repository root. They will create and use:
+
+pmc_chunker/
+  data/
+    oa_file_list.csv.gz      # cached PMC OA master list (downloaded automatically)
+    xml/                     # downloaded XML files (one per PMCID)
+  out/
+    manifest_4000.csv        # list of selected articles (≈4 000 rows)
+    paragraph_chunks_4000.jsonl
+                             # paragraph-level chunks for all XMLs
+
+
+You do not need to create these directories manually.
+
+How to Run the Pipeline (Step by Step)
+
+All commands below are run from the repository root.
+
+Step 1 – Build the 4 000-article manifest
+
+This script selects ~4 000 open-access animal/preclinical research articles (2010–2025, English/German) from PMC, filters by publication type, and stratifies them into topic buckets.
+
+python build_manifest.py
+
+
+Output:
+
+pmc_chunker/out/manifest_4000.csv
+
+
+This CSV contains at least:
+
+PMCID, PMID
+
+doi, year
+
+title, journal, topic
+
+file (OA .tar.gz path), license
+
+You normally run this only when you want to rebuild or update the corpus selection.
+
+Step 2 – Download XML full texts from PMC
+
+This script reads manifest_4000.csv and downloads the corresponding XML full texts.
+
+python download_xmls.py
+
+
+What it does:
+
+For each PMCID in pmc_chunker/out/manifest_4000.csv:
+
+Calls the PMC OA API to discover XML or .tgz packages.
+
+Prefers direct XML links; if not available, downloads the .tgz, extracts the largest .xml/.nxml file, and saves it.
+
+Skips PMCIDs whose XML has already been downloaded.
+
+Output:
+
+pmc_chunker/data/xml/PMCxxxxxxx.xml  # one file per PMCID
+
+
+You can safely rerun this script; existing XML files are skipped.
+
+Step 4 – Chunk all XMLs into paragraph-level JSONL
+
+This is the main chunking step. It uses parse_chunk.py (main logic) and chunker.py (cleaning + splitting helpers).
+
+Minimal command:
+
+python parse_chunk.py \
+  --xml-dir pmc_chunker/data/xml \
+  --out pmc_chunker/out/paragraph_chunks_4000.jsonl
+
+
+Recommended command with explicit guardrails:
+
+python parse_chunk.py \
+  --xml-dir pmc_chunker/data/xml \
+  --out pmc_chunker/out/paragraph_chunks_4000.jsonl \
+  --max-tokens 800 \
+  --overlap-sentences 1
+
+
+Options:
+
+--xml-dir DIR
+Directory containing .xml files (e.g. pmc_chunker/data/xml).
+
+--xml PATTERN [PATTERN ...]
+One or more glob patterns or file paths, e.g. --xml "pmc_chunker/data/xml/*.xml".
+
+--out PATH
+Output JSONL file. Each line is one chunk (paragraph or paragraph-split).
+
+--max-tokens N (default: 800)
+If a paragraph exceeds N tokens (approximate), it is split at sentence boundaries.
+
+--overlap-sentences N (default: 0)
+Number of sentences to overlap between consecutive chunks when splitting an overlong paragraph (e.g. 1).
+
+--per-file
+In addition to the merged output, also write one {PMCID}_out.jsonl next to each XML.
+
+Output:
+
+pmc_chunker/out/paragraph_chunks_4000.jsonl
+pmc_chunker/data/xml/PMCxxxxxxx_out.jsonl   # only if --per-file is used
+
+
+Each JSONL line contains fields such as:
+
+Identity & metadata: pmcid, pmid, nihmsid, title, journal, year, source_file
+
+Structure: section, subsection, section_index, subsection_index, figure_id
+
+Text & type: text, type (e.g. abstract, introduction, figure_caption, method_paragraph, etc.)
+
+Indices: para_local_index, split_index, chunk_index
+
+
 4.3 – Embed paragraph chunks
 
 Use the same chunks file that was produced by your paragraph chunker (paragraph_chunks_4000_merged.jsonl):
